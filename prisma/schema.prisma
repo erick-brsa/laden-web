@@ -195,6 +195,7 @@ model ShoppingHistory {
 model Suggestion {
     id        String   @id @default(cuid())
     userId    Int      @map("user_id")
+    title     String
     message   String   @db.LongText
     createdAt DateTime @default(now()) @map(name: "created_at")
     user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
