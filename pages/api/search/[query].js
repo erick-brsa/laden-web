@@ -18,8 +18,9 @@ const searchProducts = async (req, res) => {
     await prisma.$connect();
     const products = await prisma.product.findMany({
         where: {
-            name: { contains: query },
-            description: { contains: query },
+            name: {
+                search: 'cat'
+            }
         }
     });
     await prisma.$disconnect();

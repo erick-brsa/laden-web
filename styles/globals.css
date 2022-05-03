@@ -420,6 +420,14 @@ img {
 	}
 }
 
+.products__container {
+	display: grid;
+	grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+	column-gap: 2rem;
+	row-gap: 2rem;
+	margin: 1.5rem 0;
+}
+
 /** ================ Footer ================  **/
 @media (prefers-color-scheme: light) {
 	:root {

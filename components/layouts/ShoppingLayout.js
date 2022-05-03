@@ -1,5 +1,5 @@
-import Head from "next/head"
-import { ShoppingHeader, Footer }from "../ui"
+import Head from "next/head";
+import { ShoppingHeader, Footer } from "../ui";
 
 const ShoppingLayout = ({ title, description, children }) => {
     return (

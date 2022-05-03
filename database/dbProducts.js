@@ -9,6 +9,17 @@ export const getAllProducts = async () => {
     return JSON.parse(JSON.stringify(products));
 }
 
+// Obtener algunos products
+export const getSomeProducts = async (limit) => {
+    await prisma.$connect();
+    const products = await prisma.product.findMany({
+        take: limit
+    });
+    await prisma.$disconnect();
+
+    return JSON.parse(JSON.stringify(products));
+}
+
 // Obtener producto por id
 export const getProductById = async (id) => {
     await prisma.$connect();
@@ -103,10 +114,23 @@ export const getProductsByPriceRange = async (lowPrice, highPrice) => {
     return JSON.parse(JSON.stringify(products));
 }
 
+// Obtener productos por búsqueda
 export const getProductsByTerm = async (term) => {
     await prisma.$connect();
     const products = await prisma.product.findMany({
         
+    });
+    await prisma.$disconnect();
+    
+    return JSON.parse(JSON.stringify(products));
+}
+
+// Obtener productos en tendencia
+export const getTrendingProducts = async () => {
+    await prisma.$connect();
+    const products = await prisma.product.findMany({
+        take: 10,
+        orderBy: { sold: "desc" }    
     });
     await prisma.$disconnect();
     

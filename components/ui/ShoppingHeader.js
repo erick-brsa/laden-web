@@ -9,7 +9,7 @@ export const ShoppingHeader = () => {
     const [isOpen, setIsOpen] = useState(false)
 
     const handleOpenMenu = () => {
-        console.log("Botón presionado")
+        // console.log("Botón presionado")
         setIsOpen(true)
     }
 
