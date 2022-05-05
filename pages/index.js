@@ -24,6 +24,7 @@ const HomePage = ({ products, trendingProducts }) => {
 					products={trendingProducts}
 				/>
 				<section className="container section">
+					<h3 className="section__title">Productos</h3>
 					<div className="products__container">
 						{products.map(product => (
 							<ProductCard key={product.id} {...product} />

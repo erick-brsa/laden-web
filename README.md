@@ -20,7 +20,7 @@ yarn install
 
 Una vez que tengas instaladas las dependencias renombra el archivo `.env.template` a `.env`,
 aquí tendrás que declarar las variables de entorno para el correcto
-funcioamiento de la aplicación.
+funcionamiento de la aplicación.
 
 ### 3. Conectar la base de datos
 

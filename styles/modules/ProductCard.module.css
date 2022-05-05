@@ -71,6 +71,7 @@
 }
 
 .product__stars {
+	display: flex;
 	color: var(--product-stars-color);
 	font-size: var(--bigger-font-size);
 }

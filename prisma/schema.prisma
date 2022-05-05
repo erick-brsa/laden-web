@@ -130,7 +130,7 @@ model Review {
     id            String   @id @default(cuid())
     userId        Int      @map("user_id")
     productId     Int      @map("product_id")
-    qualification Int
+    qualification Int      @default(0)
     message       String   @db.LongText
     createdAt     DateTime @default(now()) @map(name: "created_at")
     user          User     @relation(fields: [userId], references: [id], onDelete: Cascade)
