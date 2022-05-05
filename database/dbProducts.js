@@ -58,11 +58,13 @@ export const getProductBySlug = async (slug) => {
 }
 
 // Obtener productos por categoría
-export const getProductsByCategory = async (category) => {
+export const getProductsByCategory = async (id) => {
     await prisma.$connect();
     const products = await prisma.product.findMany({
-        where: { category }
+        where: { category: { id } },
+        include: { review: { select: { id: true } } }
     });
+    await products.map(product => getRating(product));
     await prisma.$disconnect();
 
     return JSON.parse(JSON.stringify(products));
@@ -72,7 +74,8 @@ export const getProductsByCategory = async (category) => {
 export const getProductsBySubcategory = async (subcategory) => {
     await prisma.$connect();
     const products = await prisma.product.findMany({
-        where: { subcategory }
+        where: { subcategory },
+        include: { review: { select: { id: true } } }
     });
     await prisma.$disconnect();
 
@@ -152,6 +155,18 @@ export const getTrendingProducts = async () => {
     const products = await prisma.product.findMany({
         take: 10,
         orderBy: { sold: "desc" }
+    });
+    await prisma.$disconnect();
+
+    return JSON.parse(JSON.stringify(products));
+}
+
+// Obtener productos por fecha de creación
+export const getProductsByDate = async () => {
+    await prisma.$connect();
+    const products = await prisma.product.findMany({
+        take: 10,
+        orderBy: { createdAt: "desc" },
     });
     await prisma.$disconnect();
 

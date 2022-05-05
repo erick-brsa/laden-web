@@ -10,10 +10,10 @@ export const getAllCategories = async () => {
 }
 
 // Obtener categoría por nombre
-export const getCategoryByName = async (name) => {
+export const getCategoryByPath = async (path) => {
     await prisma.$connect();
     const category = await prisma.category.findUnique({
-        where: { name }
+        where: { path },
     })
     await prisma.$disconnect();
     return category;
@@ -23,7 +23,7 @@ export const getCategoryByName = async (name) => {
 export const getCategoryById = async (id) => {
     await prisma.$connect();
     const category = await prisma.category.findUnique({
-        where: { id }
+        where: { id },
     })
     await prisma.$disconnect();
     return category;

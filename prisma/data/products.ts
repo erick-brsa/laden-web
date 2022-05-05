@@ -258,7 +258,7 @@ export const products = [
 		price: 15000,
 		description: "Este monitor contiene una pantalla LED, con la cual no solo ahorrás energía, ya que su consumo es bajo, sino que vas a ver colores nítidos y definidos en tus películas o series favoritas.",
 		inStock: 13,
-		slug: "monitor-gamer.samsung-11",
+		slug: "monitor-gamer-samsung-11",
 		tags: ["Laptops", "Gaming", "Monitores"],
 		sold: 18,
 		sellerId: 7,

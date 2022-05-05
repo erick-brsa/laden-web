@@ -2,9 +2,9 @@ import ShoppingLayout from "../components/layouts/ShoppingLayout";
 import AdSlider from "../components/ui/AdSlider";
 import ProductCard from "../components/products/ProductCard";
 import ProductCarousel from "../components/products/ProductCarousel";
-import { getAllProducts, getTrendingProducts } from "../database";
+import { getAllProducts, getProductsByDate, getTrendingProducts } from "../database";
 
-const HomePage = ({ products, trendingProducts }) => {
+const HomePage = ({ products, trendingProducts, newProducts }) => {
 	return (
 		<ShoppingLayout
 			title="Laden - Compra en línea"
@@ -19,8 +19,12 @@ const HomePage = ({ products, trendingProducts }) => {
 				]}
 			/>
 			<ProductCarousel
-				title="Productos destacados"
+				title="Tendencias"
 				products={trendingProducts}
+			/>
+			<ProductCarousel
+				title="Nuevos productos"
+				products={newProducts}
 			/>
 			<main>
 				<section className="container section">
@@ -39,9 +43,10 @@ const HomePage = ({ products, trendingProducts }) => {
 export const getServerSideProps = async (ctx) => {
 	const products = await getAllProducts();
 	const trendingProducts = await getTrendingProducts();
+	const newProducts = await getProductsByDate();
 	return {
 		props: {
-			products, trendingProducts
+			products, trendingProducts, newProducts
 		}
 	}
 }
