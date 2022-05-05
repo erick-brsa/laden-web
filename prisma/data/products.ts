@@ -4,21 +4,16 @@ export const products = [
 		price: 119,
 		description: "Los cables USB Tipo C de VSG son un vuelco en toda la escena del gaming. Con 1.8 metros, su construcción es resistente por su material de Paracord, dando una sensación flexible y ligera para que no sientas su peso pero si la imponente presencia de sus vibrantes colores.",
 		inStock: 10,
-		// ?slug: nombre + id = ruta del producto
 		slug: "cable-usb-tipo-c-vsg-amarillo-1",
 		tags: ["gaming", "cables", "usb", "cables-usb"],
-		// ?Cantidad de productos vendidos (opcional)
 		sold: 2,
 		sellerId: 5,
 		categoryId: 3,
 		subcategoryId: 15,
-		// ?Solo utilizar rutas https
 		images: [
 			"https://http2.mlstatic.com/D_NQ_NP_636828-MLM46726815964_072021-O.webp",
 			"https://juntozstgsrvproduction.blob.core.windows.net/default-blob-images/orig_3-1920x1920_786662.jpg",
 		],
-		
-		// ?Especificaciones (opcional)
 		specifications: [
 			"Tipo: Cable Paracord", 
 			"Longitud: 1.8m", 

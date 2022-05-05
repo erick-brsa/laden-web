@@ -11,10 +11,11 @@ import styles from "/styles/modules/ProductCarousel.module.css"
 const ProductCarousel = ({ title, products }) => {
 
     return (
-        <section className="container section">
+        // <section className="container section">
+        <div className="container">
             <h3 className="section__title">{title}</h3>
             <Swiper
-                spaceBetween={10}
+                // spaceBetween={10}
                 slidesPerView={5}
                 breakpoints={{
                     320: {
@@ -37,20 +38,20 @@ const ProductCarousel = ({ title, products }) => {
                 className={styles["swiper-container"]}
             >
                 {products.map(product => {
-                    const { id, name, images } = product
+                    const { id, name, images, slug } = product;
                     return (
-                        <SwiperSlide key={id}>
-                            <article className={`${styles["product__card"]} ${styles[" carousel__slick"]}`}>
-                                <a className={styles["product__link"]} href="./productos/1">
+                        <SwiperSlide key={id} className={styles["swiper-slide"]}>
+                            <article className={styles["product__card"]}>
+                                <a className={styles["product__link"]} href={`/product/${slug}`}>
                                     <div className={styles["product__content"]}>
                                         <div className={styles["product__image"]}>
                                             <img src={images[0]} alt="Imagen de producto" />
                                         </div>
-                                        <div className={styles["product__info"]}>
+                                        {/* <div className={styles["product__info"]}>
                                             <p className={styles["product__name"]}>
                                                 {name}
                                             </p>
-                                        </div>
+                                        </div> */}
                                     </div>
                                 </a>
                             </article>
@@ -58,7 +59,7 @@ const ProductCarousel = ({ title, products }) => {
                     )
                 })}
             </Swiper>
-        </section>
+        </div>
     )
 }
 

@@ -7,7 +7,6 @@ const ShoppingLayout = ({ title, description, children }) => {
             <Head>
                 <meta name="theme-color" content="#5864be" />
                 <meta name="description" content={description} />
-                <link rel="icon" href="/icons/icon.svg" />
                 <title>{title}</title>
             </Head>
             <ShoppingHeader />

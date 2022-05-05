@@ -1,5 +1,5 @@
 generator client {
-    provider        = "prisma-client-js"
+    provider = "prisma-client-js"
     // previewFeatures = ["fullTextSearch", "fullTextIndex"]
 }
 
@@ -83,6 +83,7 @@ model Category {
     id            Int           @id @default(autoincrement())
     name          String
     image         String
+    path          String        @unique
     subcategories Subcategory[]
     product       Product[]
 
@@ -93,6 +94,7 @@ model Subcategory {
     id             Int       @id @default(autoincrement())
     mainCategoryId Int       @map("main_category_id")
     name           String
+    path           String    @unique
     category       Category  @relation(fields: [mainCategoryId], references: [id], onDelete: Cascade)
     product        Product[]
 

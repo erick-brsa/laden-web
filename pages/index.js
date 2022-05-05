@@ -1,5 +1,5 @@
 import ShoppingLayout from "../components/layouts/ShoppingLayout";
-import AdSlider from "../components/products/AdSlider";
+import AdSlider from "../components/ui/AdSlider";
 import ProductCard from "../components/products/ProductCard";
 import ProductCarousel from "../components/products/ProductCarousel";
 import { getAllProducts, getTrendingProducts } from "../database";
@@ -18,11 +18,11 @@ const HomePage = ({ products, trendingProducts }) => {
 					'https://images.unsplash.com/photo-1524678606370-a47ad25cb82a?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1469&q=80'
 				]}
 			/>
+			<ProductCarousel
+				title="Productos destacados"
+				products={trendingProducts}
+			/>
 			<main>
-				<ProductCarousel
-					title="Productos destacados"
-					products={trendingProducts}
-				/>
 				<section className="container section">
 					<h3 className="section__title">Productos</h3>
 					<div className="products__container">
