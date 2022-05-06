@@ -1,5 +1,3 @@
-import Image from "next/image";
-import Link from "next/link";
 import ShoppingLayout from "../../components/layouts/ShoppingLayout";
 import CategoryCard from "../../components/ui/CategoryCard";
 import { getAllCategories } from "../../database";
@@ -10,7 +8,7 @@ const CategoriesPage = ({ categories }) => {
 	return (
 		<ShoppingLayout
 			title="Laden- Categorías"
-			description="Categories"
+			description="Página de categorías"
 		>
 			<main>
 				<section className="container section">

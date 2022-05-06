@@ -7,7 +7,7 @@ const CategoryPage = ({ category, products }) => {
 	return (
 		<ShoppingLayout
 			title={category.name}
-			description={`Laden`}
+			description={`Página de categoría: ${category.name}`}
 		>
 			<main>
 				<section className="container section">

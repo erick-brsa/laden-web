@@ -341,7 +341,7 @@ img {
 	fill: var(--logo-morado);
 }
 
-/** ================ Header ================  **/
+/** ================ HEADER ================  **/
 @media (prefers-color-scheme: light) {
 	:root {
 		--main-nav-color-desktop: var(--main-color-400);
@@ -406,7 +406,7 @@ img {
 	}
 }
 
-/** ================ Productos ================  **/
+/** ================ PRODUCTS ================  **/
 @media (prefers-color-scheme: light) {
 	:root {
 		--bg-product-card: var(--white);
@@ -414,6 +414,7 @@ img {
 		--product-name-color: var(--text-color);
 		--product-price-color: var(--text-color);
 		--product-stars-color: var(--yellow-500);
+		--text-product-link: var(--main-color-300);
 	}
 }
 
@@ -424,6 +425,7 @@ img {
 		--product-name-color: var(--text-color);
 		--product-price-color: var(--text-color);
 		--product-stars-color: var(--yellow-400);
+		--text-product-link: var(--blue-500);
 	}
 }
 
@@ -435,7 +437,7 @@ img {
 	margin: 1rem 0;
 }
 
-/** ================ Footer ================  **/
+/** ================ FOOTER ================  **/
 @media (prefers-color-scheme: light) {
 	:root {
 		--footer-color: var(--bg-color);
@@ -451,3 +453,21 @@ img {
 		--footer-title: var(--title-color);
 	}
 }
+
+/** ================ CARRITO ================  **/
+@media (prefers-color-scheme: light) {
+	:root {
+		--footer-color: var(--bg-color);
+		--footer-color-alt: var(--bg-color-alt);
+		--footer-title: var(--main-color-500);
+	}
+}
+
+@media (prefers-color-scheme: dark) {
+	:root {
+		--footer-color: var(--bg-color-alt);
+		--footer-color-alt: var(--bg-color);
+		--footer-title: var(--title-color);
+	}
+}
+
