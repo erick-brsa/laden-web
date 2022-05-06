@@ -52,7 +52,6 @@ const CartList = ({ products }) => {
 
 export const getServerSideProps = async (ctx) => {
     const products = await getSomeProducts(10);
-    console.log(products);
 
     return {
         props: {
