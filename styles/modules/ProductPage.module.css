@@ -1,0 +1,259 @@
+/*============  VISTA PRODUCTO  =============*/
+.container {
+	display: flex;
+	flex-direction: column;
+	gap: 1.5rem;
+    padding: 1.5rem 1.25rem;
+    max-width: 1200px;
+    margin-left: auto;
+    margin-right: auto;
+    position: relative;
+}
+
+.banner {
+	width: 100%;
+	height: 20%;
+}
+
+.banner__image {
+	width: 100%;
+	height: 300px;
+}
+
+.container__product-info {
+    display: flex;
+    width: 100%;
+    gap: 1.5rem;
+    /* position: relative; */
+}
+
+.container__product-image {
+    background: var(--white);
+    width: 60%;
+    height: 400px;
+    padding: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 1rem;
+}
+
+.product__image {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+.container__product-options {
+	width: 100%;
+	height: 100%;
+	background: var(--bg-color-alt);
+	padding: 2rem;
+	border-radius: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    position: sticky;
+    /* top: 10rem; */
+}
+
+@media (min-width: 768px) {
+	.container__product-options {
+		max-width: 40%;
+	}
+}
+
+.container__name-product {
+	display: flex;
+	justify-content: space-between;
+    gap: .5rem;
+}
+
+.title__text {
+    line-height: 150%;
+    font-size: 1.5rem;
+}
+
+.saved-icon {
+    cursor: pointer;
+}
+
+.container__ranking {
+	display: flex;
+	justify-content: space-between;
+}
+
+.product__stars {
+	display: flex;
+	color: var(--product-stars-color);
+	font-size: var(--bigger-font-size);
+}
+
+.link__opinions {
+    all: unset;
+	color: var(--text-color);
+}
+
+.link__opinions:hover {
+	color: var(--white);
+    transition: 0.25s;
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+.container__info {
+	display: flex;
+	flex-direction: column;
+	gap: 1rem;
+}
+
+.container__price {
+	font-size: var(--h3-font-size);
+	font-weight: bold;
+	border-radius: 1rem;
+	color: var(--white);
+}
+
+.price {
+	margin: auto;
+}
+
+.cart-btn {
+	display: flex;
+	justify-content: center;
+	color: var(--white);
+	background: var(--main-color-400);
+	padding: 10px;
+	border-radius: 4px;
+    font-size: var(--bigger-font-size);
+    font-weight: 600;
+}
+
+.cart-btn:hover {
+	/* transform: scale(1.03); */
+	/* font-weight: bold; */
+}
+
+.container__product-description {
+    max-width: 100%;
+	display: flex;
+	flex-direction: column;
+	gap: 1rem;
+}
+
+@media (min-width: 768px) {
+    .container__product-description {
+        max-width: 60%;
+    }
+}
+
+.container__list {
+	margin-left: 1.5rem;
+}
+
+.specifications {
+	list-style: disc;
+}
+
+.subtitle__text {
+	margin-bottom: 1rem;
+}
+
+.container__product-comments {
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+	gap: 1rem;
+}
+
+@media (min-width: 768px) {
+    .container__product-comments {
+        width: 60%;
+    }
+}
+
+.container__new-comment {
+	background: var(--bg-color-alt);
+	border-radius: 0.4rem;
+}
+
+.new__comment {
+	padding: 1rem;
+}
+
+.text__new-comment{
+    background-color: #fff;
+    padding: 1rem;
+}
+
+.text__new-comment {
+	background: var(--bg-color-alt);
+	border-radius: 4px;
+	width: 100%;
+    color: var(--title-color);
+}
+
+.text__new-comment::placeholder {
+    color: var(--text-color);
+}
+
+@media (max-width: 768px) {
+	.container__product-info {
+		flex-direction: column;
+		justify-content: center;
+	}
+
+	.container__product-image {
+		width: 100%;
+	}
+}
+
+/** =========== NOTIFICATIONS ========== */
+
+.container__notification {
+	max-width: 800px;
+	background: var(--bg-color-alt);
+	border-radius: 1rem;
+	padding: 1rem;
+	display: flex;
+}
+
+.container__user {
+	width: 50px;
+	height: 50px;
+}
+
+.avatar {
+	width: 100%;
+	height: 100%;
+	border-radius: 50%;
+}
+
+.user__name {
+	font-weight: bold;
+	color: var(--white);
+}
+
+.text__comment {
+	color: var(--text-color);
+}
+
+.container__comment {
+	padding: 0 0 0 1rem;
+}
+
+.time {
+	margin-top: 20px;
+	color: var(--text-color);
+}
+
+@media (max-width: 500px) {
+	.container__notification {
+		font-size: 0.7rem;
+	}
+
+	.container__user {
+		width: 30px;
+		height: 30px;
+	}
+}

@@ -53,6 +53,7 @@ export const getProductBySlug = async (slug) => {
         where: { slug },
         include: { review: true, category: true, subcategory: true  }
     });
+    await getRating(product);
     await prisma.$disconnect();
 
     return JSON.parse(JSON.stringify(product));
