@@ -1,2 +1,3 @@
-export * from "./Footer";
-export * from "./ShoppingHeader";
+export * from "./header";
+export * from "./footer";
+export * from "./categories";

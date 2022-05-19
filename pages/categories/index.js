@@ -1,5 +1,5 @@
-import ShoppingLayout from "../../components/layouts/ShoppingLayout";
-import CategoryCard from "../../components/ui/CategoryCard";
+import { ShoppingLayout } from "../../components/layouts";
+import { CategoryCard } from "../../components/ui";
 import { getAllCategories } from "../../database";
 
 import styles from "../../styles/modules/categories.module.css";
@@ -15,9 +15,9 @@ const CategoriesPage = ({ categories }) => {
 					<h2 className="section__title text-center">Categorías</h2>
 					<div className={styles["categories__container"]}>
 						{categories.map((category) => (
-							<CategoryCard 
-								key={category.id} 
-								category={category} 
+							<CategoryCard
+								key={category.id}
+								category={category}
 							/>
 						))}
 					</div>

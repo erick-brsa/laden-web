@@ -1,6 +1,6 @@
 import styles from '../../styles/modules/Cart.module.css';
 
-const OrderSummary = () => {
+export const OrderSummary = () => {
     return (
         <div className={styles["order-sumary"]}>
             <div className={styles["order-sumary__title"]}>
@@ -19,5 +19,3 @@ const OrderSummary = () => {
         </div>
     )
 }
-
-export default OrderSummary

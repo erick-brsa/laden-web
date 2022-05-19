@@ -8,7 +8,7 @@ import "swiper/css";
 
 import styles from "/styles/modules/ProductCarousel.module.css"
 
-const ProductCarousel = ({ title, products }) => {
+export const ProductCarousel = ({ title, products }) => {
 
     return (
         // <section className="container section">
@@ -62,5 +62,3 @@ const ProductCarousel = ({ title, products }) => {
         </div>
     )
 }
-
-export default ProductCarousel

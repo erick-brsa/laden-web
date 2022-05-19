@@ -1,7 +1,7 @@
 import Head from "next/head";
 import { ShoppingHeader, Footer } from "../ui";
 
-const ShoppingLayout = ({ title, description, children }) => {
+export const ShoppingLayout = ({ title, description, children }) => {
     return (
         <>
             <Head>
@@ -15,5 +15,3 @@ const ShoppingLayout = ({ title, description, children }) => {
         </>
     )
 }
-
-export default ShoppingLayout

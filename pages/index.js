@@ -1,7 +1,6 @@
-import ShoppingLayout from "../components/layouts/ShoppingLayout";
-import AdSlider from "../components/ui/AdSlider";
-import ProductCard from "../components/products/ProductCard";
-import ProductCarousel from "../components/products/ProductCarousel";
+import {ShoppingLayout} from "../components/layouts";
+import AdSlider from "../components/ui/pretty/AdSlider";
+import {ProductCard, ProductCarousel }from "../components/products";
 import { getAllProducts, getProductsByDate, getTrendingProducts } from "../database";
 
 const HomePage = ({ products, trendingProducts, newProducts }) => {

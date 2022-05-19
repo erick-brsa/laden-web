@@ -1,5 +1,5 @@
-import ShoppingLayout from '../../components/layouts/ShoppingLayout';
-import ProductCarousel from '../../components/products/ProductCarousel';
+import { ShoppingLayout } from '../../components/layouts';
+import { ProductCarousel } from '../../components/products';
 import { getProductBySlug, getProductsByCategoryAndSubcategory } from '../../database';
 import { StarIcon as StarIconSolid, HeartIcon as HeartIconSolid } from "@heroicons/react/solid";
 import { StarIcon as StarIconOutline, HeartIcon as HeartIconOutline } from "@heroicons/react/outline";

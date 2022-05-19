@@ -1,6 +1,8 @@
+import Link from "next/link";
+
 import styles from "../../styles/modules/Cart.module.css";
 
-const CartList = ({ products }) => {
+export const CartList = ({ products }) => {
     return (
         <div className={styles["cart-list"]}>
             {products.map(product => (
@@ -19,9 +21,11 @@ const CartList = ({ products }) => {
                             </div>
                             <div className={styles["product__details"]}>
                                 <div className={styles["details"]}>
-                                    <a href="#" className={styles["details-link"]}>
-                                        Ver detalles
-                                    </a>
+                                    <Link href={`/product/${product.slug}`}>
+                                        <a className={styles["details-link"]}>
+                                            Ver detalles
+                                        </a>
+                                    </Link>
                                 </div>
                                 <div className={styles["item-counter"]}>
                                     <select name="" id="">
@@ -59,5 +63,3 @@ export const getServerSideProps = async (ctx) => {
         }
     }
 }
-
-export default CartList

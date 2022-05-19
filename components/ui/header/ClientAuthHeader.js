@@ -1,6 +1,7 @@
-import Link from "next/link"
+import Link from "next/link";
+import styles from "../../../styles/modules/Header.module.css";
 
-const ClientAuthHeader = () => {
+export const ClientAuthHeader = () => {
 	return (
 		<header className="header" id="header">
 			<div className={styles["main-nav-container"]}>
@@ -29,5 +30,3 @@ const ClientAuthHeader = () => {
 		</header>
 	)
 }
-
-export default ClientAuthHeader

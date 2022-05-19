@@ -1,9 +1,9 @@
-import ShoppingLayout from "../../components/layouts/ShoppingLayout";
-import ProductCard from "../../components/products/ProductCard";
+import { ShoppingLayout } from "../../components/layouts";
+import { ProductCard } from "../../components/products";
 import { getCategoryByPath, getProductsByCategory } from "../../database";
 
 const CategoryPage = ({ category, products }) => {
-	
+
 	return (
 		<ShoppingLayout
 			title={category.name}

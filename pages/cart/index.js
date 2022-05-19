@@ -1,10 +1,10 @@
-import CartList from '../../components/cart/CartList';
-import OrderSummary from '../../components/cart/OrderSummary';
-import ShoppingLayout from '../../components/layouts/ShoppingLayout';
-import styles from '../../styles/modules/Cart.module.css';
+import { CartList, OrderSummary } from '../../components/cart';
+import { ShoppingLayout } from '../../components/layouts';
 import { getSomeProducts } from '../../database';
 
-const CartPage = ({products}) => {
+import styles from '../../styles/modules/Cart.module.css';
+
+const CartPage = ({ products }) => {
     return (
         <ShoppingLayout
             title="Laden - Carrito de compras"
@@ -24,7 +24,6 @@ const CartPage = ({products}) => {
 
 export const getServerSideProps = async (ctx) => {
     const products = await getSomeProducts(10);
-    console.log(products);
     return {
         props: {
             products

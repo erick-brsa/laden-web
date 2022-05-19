@@ -1,7 +1,7 @@
 import Link from "next/link";
-import styles from "../../styles/modules/categories.module.css";
+import styles from "../../../styles/modules/categories.module.css";
 
-const CategoryCard = ({ category }) => {
+export const CategoryCard = ({ category }) => {
     return (
         <div className={styles["category__card"]}>
             <Link href={`/categories/${category.path}`}>
@@ -20,5 +20,3 @@ const CategoryCard = ({ category }) => {
         </div>
     )
 }
-
-export default CategoryCard
