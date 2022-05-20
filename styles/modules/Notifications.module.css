@@ -1,11 +1,25 @@
 /** =========== NOTIFICATIONS ========== */
+.notification-container {
+	flex-direction: column;
+	display: flex;
+	gap: 1rem;
+	margin-top: 1rem;
 
-.container__notification {
-	max-width: 800px;
-	background: var(--bg-color-alt);
-	border-radius: 1rem;
+}
+
+.notification {
+	background: var(--bg-notification-color);
+	border-radius: 8px;
+	transition: 0.4s;
 	padding: 1rem;
 	display: flex;
+	gap: 1rem;
+	box-shadow: 0px 4px 4px 1px rgba(50, 50, 93, .25);
+}
+
+.notification:hover {
+	box-shadow: 0px 4px 6px 2px rgba(50, 50, 93, .25);
+	transition: 0.4s;
 }
 
 .container__user {
@@ -19,21 +33,23 @@
 	border-radius: 50%;
 }
 
+.container__comment {
+	display: flex;
+	flex-direction: column;
+	gap: .4rem;
+}
+
 .user__name {
 	font-weight: bold;
-	color: var(--white);
+	color: var(--title-color);
 }
 
-.text__comment {
-	color: var(--text-color);
-}
-
-.container__comment {
-	padding: 0 0 0 1rem;
+.name_product {
+	font-weight: bold;
+	color: var(--title-color);
 }
 
 .time {
-	margin-top: 20px;
 	color: var(--text-color);
 }
 

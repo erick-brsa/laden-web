@@ -180,7 +180,6 @@
 	}
 }
 
-
 /** ================ BASE ================ **/
 *,
 *::before,
@@ -282,27 +281,49 @@ img {
 }
 
 /** ================ REUSABLE CSS CLASSES ================ **/
-.section { padding: 1.5rem 0; }
+.section {
+	padding: 1.5rem 0;
+}
 
-.section__title { color: var(--title-color); }
+.section__title {
+	color: var(--title-color);
+}
 
-.section__height {height: 100vh; }
+.section__height {
+	height: 100vh;
+}
 
-.title { fill: var(--title-color); }
+.title {
+	fill: var(--title-color);
+}
 
-.text { fill: var(--text-color); }
+.text {
+	fill: var(--text-color);
+}
 
-.text-center { text-align: center; }
+.text-center {
+	text-align: center;
+}
 
-.flex { display: flex; }
+.flex {
+	display: flex;
+}
 
-.flex-col { flex-direction: column; }
+.flex-col {
+	flex-direction: column;
+}
 
-.justify-center { justify-content: center; }
+.justify-center {
+	justify-content: center;
+}
 
-.flex-strech { flex: 1; }
+.flex-strech {
+	flex: 1;
+}
 
-.text-color-primary { color: var(--main-color-200); }
+.text-color-primary {
+	color: var(--main-color-200);
+}
 
 /** ================ LAYOUT ================ **/
 .container {
@@ -472,3 +493,16 @@ img {
 	}
 }
 
+/** ================ NOTIFICACIONES ================  **/
+
+@media (prefers-color-scheme: light) {
+	:root {
+		--bg-notification-color: var(--white);
+	}
+}
+
+@media (prefers-color-scheme: dark) {
+	:root {
+		--bg-notification-color: var(--bg-color-alt);
+	}
+}
