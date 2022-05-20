@@ -1,10 +1,12 @@
 import { getSession, signIn } from 'next-auth/react'
 import { ClientAuthLayout } from '../../components/layouts'
 
-const loginPage = ({ session }) => {
+import styles from '../../styles/modules/Login.module.css'
+
+const LoginPage = ({ session }) => {
     return (
         <ClientAuthLayout>
-            <div>
+            {/* <div>
                 <section className='container mx-auto py-20'>
                     {!session && (
                         <div className='flex gap-10 justify-center'>
@@ -20,7 +22,7 @@ const loginPage = ({ session }) => {
                         </div>
                     )}
                 </section>
-            </div>
+            </div> */}
         </ClientAuthLayout>
     )
 }
@@ -41,4 +43,4 @@ export const getServerSideProps = async (context) => {
     }
 }
 
-export default loginPage
+export default LoginPage
