@@ -1,3 +1,3 @@
-export * from './ClientAuthHeader';
+export * from './client/ClientAuthHeader';
 export * from './SellerAuthHeader';
-export * from './ShoppingHeader';
+export * from './client/ShoppingHeader';

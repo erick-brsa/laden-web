@@ -111,7 +111,7 @@
 	font-size: var(--h3-font-size);
 	font-weight: bold;
 	border-radius: 1rem;
-	color: var(--white);
+	color: var(--title-color);
 }
 
 .price {
