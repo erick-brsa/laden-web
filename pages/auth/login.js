@@ -6,7 +6,7 @@ import styles from '../../styles/modules/Login.module.css'
 const LoginPage = ({ session }) => {
     return (
         <ClientAuthLayout>
-            {/* <div>
+            <div>
                 <section className='container mx-auto py-20'>
                     {!session && (
                         <div className='flex gap-10 justify-center'>
@@ -22,7 +22,7 @@ const LoginPage = ({ session }) => {
                         </div>
                     )}
                 </section>
-            </div> */}
+            </div>
         </ClientAuthLayout>
     )
 }

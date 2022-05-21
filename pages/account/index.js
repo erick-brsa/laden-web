@@ -10,6 +10,7 @@ const AccountPage = ({ session }) => {
 			<div className='container'>
 				<h1>{session.user.name}</h1>
 			</div>
+			<button onClick={signOut}>Cerrar sesión</button>
 		</ShoppingLayout>
 	)
 }

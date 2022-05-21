@@ -4,6 +4,8 @@ export default function handler(req, res) {
     switch (req.method) {
         case "GET":
             return getAllProducts(req, res);
+        case "POST":
+            return createProduct(req, res);
         default:
             res.status(200).json({ name: 'Example' })
     }
@@ -27,4 +29,14 @@ const getAllProducts = async (req, res) => {
     await prisma.$disconnect();
 
     res.status(200).json(products);
+}
+
+const createProduct = async (req, res) => {
+    await prisma.$connect();
+    const product = await prisma.product.create({
+        data: { ...req.body }
+    });
+    await prisma.$disconnect();
+
+    res.status(200).json(product);
 }
