@@ -94,23 +94,26 @@ const LoginPage = () => {
                             </i>
                         </p>
                     </div>
-                    <div className={`${styles["formulario__grupo"]} ${styles["formulario__grupo-btn-enviar"]}`}>
-                        <button
-                            type="submit"
-                            className={styles["formulario__btn"]}
-                            onClick={handleSubmit}
-                        >
-                            Ingresar
-                        </button>
-                    </div>
                     <div>
-                        <button
-                            type='button'
-                            onClick={() => signIn('google')}
-                            className={styles["formulario__btn-google"]}
-                        >
-                            Iniciar sesión con Google
-                        </button>
+
+                        <div className={styles["formulario__grupo-btn-enviar"]}>
+                            <button
+                                type="submit"
+                                className={styles["formulario__btn"]}
+                                onClick={handleSubmit}
+                            >
+                                Ingresar
+                            </button>
+                        </div>
+                        <div className={styles["formulario__grupo-btn-enviar"]}>
+                            <button
+                                type='button'
+                                onClick={() => signIn('google')}
+                                className={styles["formulario__btn-google"]}
+                            >
+                                Iniciar sesión con Google
+                            </button>
+                        </div>
                     </div>
                 </form>
 

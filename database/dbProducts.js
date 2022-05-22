@@ -51,7 +51,7 @@ export const getProductBySlug = async (slug) => {
     await prisma.$connect();
     const product = await prisma.product.findUnique({
         where: { slug },
-        include: { review: true, category: true, subcategory: true  }
+        include: { review: true, category: true, subcategory: true }
     });
     await getRating(product);
     await prisma.$disconnect();
@@ -173,4 +173,16 @@ export const getProductsByDate = async () => {
     await prisma.$disconnect();
 
     return JSON.parse(JSON.stringify(products));
+}
+
+export const getProductsBySeller = async (id) => {
+    await prisma.$connect();
+    const products = await prisma.product.findMany({
+        include: { review: { select: { id: true } } },
+        where: { sellerId: id },
+    });
+    await products.map(product => getRating(product));
+
+    await prisma.$disconnect();
+    return res.status(200).json(products);
 }

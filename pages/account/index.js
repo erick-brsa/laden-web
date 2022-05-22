@@ -1,13 +1,22 @@
 /* eslint-disable @next/next/no-img-element */
 import { getSession, useSession, signOut } from 'next-auth/react';
-import { ShoppingLayout } from '../../components/layouts';
-import { Banner } from '../../components/ui/pretty';
+import { useState } from 'react';
+import Link from 'next/link';
+import { ShoppingLayout } from '/components/layouts';
+import { Banner } from '/components/ui/pretty';
+import { getUserById } from '/database/dbUsers';
 
 import styles from './Account.module.css';
 
-const AccountPage = ({ session }) => {
+const AccountPage = ({ user }) => {
 
-	const { user } = session;
+	const [name, setName] = useState('');
+	const [email, setEmail] = useState('');
+	const [password, setPassword] = useState('');
+	const [passwordConfirm, setPasswordConfirm] = useState('');
+	const [image, setImage] = useState('');
+
+
 
 	return (
 		<ShoppingLayout
@@ -44,7 +53,9 @@ const AccountPage = ({ session }) => {
 												placeholder=" "
 												value={user.name}
 											/>
-											<label htmlFor="name" className={styles["formulario__label"]}>Nombre</label>
+											<label htmlFor="name" className={styles["formulario__label"]}>
+												{user.role === 'vendedor' ? 'Razón social' : 'Nombre'}
+											</label>
 										</div>
 									</div>
 									<div className={styles["formulario__grupo"]}>
@@ -109,8 +120,6 @@ const AccountPage = ({ session }) => {
 											El correo no es válido.
 										</p> */}
 									</div>
-								</form>
-
 								<div className={styles["account__buttons"]}>
 									<button
 										onClick={() => signOut()}
@@ -119,18 +128,33 @@ const AccountPage = ({ session }) => {
 										Cerrar sesión
 									</button>
 									<button
-										onClick={() => signOut()}
+										// onClick={() => signOut()}
 										className={styles["account__signout"]}
 									>
 										Editar cuenta
 									</button>
-									<button
-										onClick={() => signOut()}
-										className={styles["account__signout"]}
-									>
-										Hazte vendedor
-									</button>
+									{user.role === 'vendedor' ? (
+										<Link href="/seller">
+											<a
+												className={styles["account__signout"]}
+											>
+												Administra tus productos
+											</a>
+										</Link>
+
+									) : (
+										<Link href="/auth/register_seller">
+											<a
+												className={styles["account__signout"]}
+											>
+												Hazte vendedor
+											</a>
+										</Link>
+
+									)}
 								</div>
+								</form>
+
 							</div>
 						</div>
 					</div>
@@ -142,6 +166,7 @@ const AccountPage = ({ session }) => {
 
 export const getServerSideProps = async (context) => {
 	const session = await getSession(context)
+	console.log(session)
 	if (!session) return {
 		redirect: {
 			destination: "/auth/login",
@@ -149,9 +174,13 @@ export const getServerSideProps = async (context) => {
 		}
 	}
 
+	const user = await getUserById(session.user.id)
+	console.log(user)
+
 	return {
 		props: {
-			session
+			session,
+			user
 		}
 	}
 }

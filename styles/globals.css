@@ -510,8 +510,8 @@ img {
 /** ================ REGISTRO ================  **/
 
 @media (prefers-color-scheme: light){
-    :root {
-        --bg-form: var(--white);
+	:root {
+		--bg-form: var(--white);
         --error-color: var(--red-700);
         --successful-validation: var(--green-600);
         --input-color: var(--main-color-400);
@@ -528,5 +528,37 @@ img {
         --input-color: var(--main-color-100);
         --error-color: var(--red-400);
         --input-text-color: var(--title-color);
+    }
+}
+
+/** ================ REGISTRO VENDEDOR ================  **/
+
+@media (prefers-color-scheme: light){
+    :root {
+        --bg-form: var(--white);
+        --error-color: var(--red-700);
+        --successful-validation: var(--green-600);
+        --link-color: var(--enterprise-color-400);
+        --input-color: var(--text-color);
+        --error-color: var(--red-700);
+        --input-text-color: var(--title-color);
+
+        --main-nav-color-desktop: var(--enterprise-color-500);
+		--main-nav-color: var(--enterprise-color-50);
+    }
+    
+}
+@media (prefers-color-scheme: dark){
+    :root {
+        --bg-form: var(--bg-color);
+        --error-color: var(--red-500);
+        --successful-validation: var(--green-500);
+        --link-color: var(--title-color);
+        --input-color: var(--text-color);
+        --error-color: var(--red-400);
+        --input-text-color: var(--title-color);
+
+        --main-nav-color-desktop: var(--bg-color-alt);
+		--main-nav-color: var(--bg-color-alt);
     }
 }

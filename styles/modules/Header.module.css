@@ -99,7 +99,7 @@
 	color: var(--main-nav-color);
 }
 
-@media screen and (max-width: 767px) {
+@media (max-width: 767px) {
 	.main-nav__menu {
 		padding: 0.5rem 1.25rem;
 		position: fixed;

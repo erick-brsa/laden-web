@@ -24,12 +24,13 @@ export const checkUserEmailPassword = async (email, password) => {
         return null;
     }
 
-    const { role, id, name } = user;
+    const { id, role, name, image } = user;
     return {
         id,
         email: email.toLocaleLowerCase(),
         role,
-        name
+        name,
+        image,
     };
 }
 
@@ -51,7 +52,7 @@ export const oAUthToDbUser = async (oAuthEmail, oAuthName) => {
             email: oAuthEmail,
             name: oAuthName,
             password: '@',
-            image: 'https://ui-avatars.com/api/?name=' + oAuthName,
+            image: 'https://ui-avatars.com/api/?size=500&background=414b9a&color=fff&bold=true&name=' + oAuthName.toLocaleLowerCase(),
         }
     });
 
@@ -59,4 +60,15 @@ export const oAUthToDbUser = async (oAuthEmail, oAuthName) => {
 
     const { id, name, email, role } = newUser;
     return { id, name, email, role, image };
+}
+
+// Obtener usuario por id
+export const getUserById = async (id) => {
+    await prisma.$connect();
+    const user = await prisma.user.findUnique({
+        select: { id: true, email: true, name: true, phoneNumber: true, role: true, image: true},
+        where: { id },
+    });
+    await prisma.$disconnect();
+    return user;
 }

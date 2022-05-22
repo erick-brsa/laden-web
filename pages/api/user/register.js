@@ -46,7 +46,7 @@ const registerUser = async (req, res) => {
 
     const newUser = await prisma.user.create({
         data: {
-            image: "https://ui-avatars.com/api/?name=" + name,
+            image: "https://ui-avatars.com/api/?size=500&background=414b9a&color=fff&bold=true&name=" + name.toLocaleLowerCase(),
             email: email.toLocaleLowerCase(),
             password: bcrypt.hashSync(password),
             name,

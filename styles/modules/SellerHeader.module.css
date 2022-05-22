@@ -1,0 +1,48 @@
+.main-nav-container {
+	background: var(--main-nav-color);
+	padding: 0 1.25rem;
+}
+
+.main-nav {
+    /* position: fixed;
+    width: 100%;
+    top: 0; */
+    height: var(--main-header-height);
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	max-width: 1200px;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+@media (max-width: 767px) {
+	.main-nav__menu {
+		padding: 0.5rem 1.25rem;
+		position: fixed;
+		bottom: 0;
+		left: 0;
+		background-color: var(--bg-main-nav-menu);
+		box-shadow: 0 -1px 12px hsla(174, 63%, 15%, 0.15);
+		width: 100%;
+		height: var(--bottom-bar-height);
+		padding: 0 1rem;
+		display: grid;
+		align-content: center;
+		border-radius: 1.25rem 1.25rem 0 0;
+		transition: 0.4s;
+	}
+}
+
+.formulario__container {
+	background: repeat
+		url(https://images.unsplash.com/photo-1595475207225-428b62bda831?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=880&q=80);
+}
+
+.formulario__btn {
+    background-color: var(--enterprise-color-500);
+}
+
+.formulario__btn:hover {
+    background-color: var(--enterprise-color-600);
+}
