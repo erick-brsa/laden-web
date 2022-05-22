@@ -2,7 +2,6 @@ import bcrypt from 'bcryptjs';
 import { prisma } from "./prisma";
 
 export const checkUserEmailPassword = async (email, password) => {
-    console.log("autenticando")
     await prisma.$connect();
     const user = await prisma.user.findUnique({
         where: { email },
