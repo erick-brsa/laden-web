@@ -2,6 +2,8 @@ import { getSession, useSession, signOut } from 'next-auth/react';
 import { ShoppingLayout } from '../../components/layouts';
 
 const AccountPage = ({ session }) => {
+	const { user } = session;
+	console.log(user);
 	return (
 		<ShoppingLayout
 			title="Laden - Mi cuenta"
