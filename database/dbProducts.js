@@ -174,3 +174,13 @@ export const getProductsByDate = async () => {
 
     return JSON.parse(JSON.stringify(products));
 }
+
+export const getProductsBySeller = async (id) =>{
+    await prisma.$connect();
+    const products = await prisma.product.findMany({
+        include: { review: true }, 
+        where: { sellerId: id }
+    })
+    await prisma.$disconnect();
+    return JSON.parse(JSON.stringify(products));
+}

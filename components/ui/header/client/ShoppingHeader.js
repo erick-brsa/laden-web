@@ -175,7 +175,7 @@ export const ShoppingHeader = () => {
                                 </Link>
                             </li>
                             <li className={styles["secondary-nav__item"]}>
-                                <Link href="/information">
+                                <Link href="/seller">
                                     <a className={styles["secondary-nav__link"]}>
                                         Servicios
                                     </a>
