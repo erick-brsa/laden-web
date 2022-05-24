@@ -65,12 +65,6 @@
 	background-color: var(--bg-color-alt);
 }
 
-.account__name {
-}
-
-.account__email {
-}
-
 .account__signout {
 	all: unset;
 	cursor: pointer;

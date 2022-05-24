@@ -51,7 +51,7 @@ export const oAUthToDbUser = async (oAuthEmail, oAuthName) => {
         data: {
             email: oAuthEmail,
             name: oAuthName,
-            password: '@',
+            password: '',
             image: 'https://ui-avatars.com/api/?size=500&background=414b9a&color=fff&bold=true&name=' + oAuthName.toLocaleLowerCase(),
         }
     });
@@ -70,5 +70,6 @@ export const getUserById = async (id) => {
         where: { id },
     });
     await prisma.$disconnect();
+    
     return user;
 }

@@ -24,7 +24,7 @@ const AccountPage = ({ user }) => {
 			description="Página de mi cuenta"
 		>
 			<Banner
-				image={`https://images.unsplash.com/photo-1609567994158-52faa6d3f000?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=764&q=80`}
+				image={`https://images.unsplash.com/photo-1561704061-138b11686db5?crop=entropy&cs=tinysrgb&fm=jpg&ixlib=rb-1.2.1&q=80&raw_url=true&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470`}
 			// title="Mi cuenta"
 			/>
 			<main>
@@ -166,7 +166,6 @@ const AccountPage = ({ user }) => {
 
 export const getServerSideProps = async (context) => {
 	const session = await getSession(context)
-	console.log(session)
 	if (!session) return {
 		redirect: {
 			destination: "/auth/login",
@@ -175,7 +174,6 @@ export const getServerSideProps = async (context) => {
 	}
 
 	const user = await getUserById(session.user.id)
-	console.log(user)
 
 	return {
 		props: {

@@ -73,7 +73,6 @@ const registerUser = async (req, res) => {
 
 const updateUser = async (req, res) => {
     const { id = '', name = '', phone = '' } = req.body;
-    console.log('datos recibidos: ' + JSON.stringify(req.body));
 
     if (name.length < 2) {
         return res.status(400).json({
@@ -99,7 +98,6 @@ const updateUser = async (req, res) => {
         })
     }
 
-    console.log('usuario encontrado: ' + user.name)
     const updatedUser = await prisma.user.update({
         where: { id: id },
         data: {
@@ -111,7 +109,6 @@ const updateUser = async (req, res) => {
 
     await prisma.$disconnect();
 
-    console.log('usuario actualizado: ' + updatedUser.name)
     return res.status(201).json({
         message: 'Usuario creado con éxito',
     });
