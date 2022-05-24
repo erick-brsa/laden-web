@@ -1,0 +1,241 @@
+
+/*============  Variables  =============*/
+
+
+/*============  Barra Lateral  =============*/
+.l-navbar{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: calc(70px + 156px);
+    height: 100vh;
+    background-color: var(--enterprise-color-400);
+    padding: .5rem 1.5rem;
+    transition: 0.5s;
+    z-index: 100;
+}
+
+.nav{
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    overflow: hidden;
+}
+
+.container__seller-graphs{
+    margin: 1rem 0;
+}
+
+.container__logout{
+    margin-bottom: 2rem;
+}
+
+.logout-btn {
+    all: unset;
+}
+
+.nav__logo{
+    margin: 2rem 2.7rem;
+}
+
+.nav__list{
+    display: flex;
+    flex-direction: column;
+    margin-top: 2rem;
+    gap: 1.5rem;
+}
+
+.nav__link{
+    position: relative;
+    color: var(--white);
+    margin-bottom: 1.5rem;
+    transition: .3s;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.nav__link:hover{
+    transform: scale(1.03);
+}
+
+.container__page{
+    position: absolute;
+    width: 83%;
+    left: calc(70px + 156px);
+    top: 0;
+    padding: 2rem 3rem;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.container__carusel{
+    width: 100%;
+    height: 40vh;
+    border-radius: 1rem;
+}
+
+.container__graphs{
+    width: 100%;
+    height: 50vh;
+    display: flex;
+    flex-direction: row;
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+.container__graph-sell{
+    width: 60%;
+    height: 100%;
+}
+
+.graph__sell, .graph__rating{
+    width: 100%;
+    height: 50vh;
+    background-color: var(--bg-color-alt);
+    border-radius: 1rem;
+    margin-top: 1rem;
+}
+
+.container__filter{
+    display: flex;
+    justify-content: space-between;
+}
+
+.add__product{
+    display: flex;
+    color: var(--white);
+    width: 12rem;
+    height: 3rem;
+    background-color: var(--enterprise-color-400);
+    border-radius: 5px;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+
+.add__product:hover{
+    transform: scale(1.05);
+}
+
+.filter__content{
+    display: flex;
+    gap: 0.5rem;
+}
+
+.text__filter{
+    background-color: var(--enterprise-color-400);
+    width: 6rem;
+    height: 3rem;
+    padding: 0 7px;
+    text-align: center;
+    color: var(--white);
+    font-weight: bolder;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+}
+
+.filter{
+    height: 3rem;
+    border-radius: 5px;
+    padding: 5px;
+}
+
+.container__graph-rating{
+    width: 40%;
+    height: 100%;
+}
+
+.container__products{
+    width: 100%;
+    height: 70vh;
+    background-color: var(--white);
+}
+
+.container__page-products{
+    position: absolute;
+    width: 83%;
+    left: calc(70px + 156px);
+    top: 0;
+    padding: 2rem 3rem;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+
+/*============  Entregas  =============*/
+.container__deliver{
+    background-color: var(--bg-color-alt);
+    width: 100%;
+    height: 15rem;
+    display: flex;
+    justify-content: left;
+    align-items: center;
+    border-radius: 1rem;
+    flex-direction: column;
+    padding: 1rem;
+    gap: 10px;
+    box-shadow: 3px 3px 5px 1px rgba(50, 50, 93, .25);
+}
+
+.container__user{
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    width: 100%;
+}
+
+.avatar {
+	width: 50px;
+	height: 50px;
+	border-radius: 50%;
+}
+
+.user__name {
+	font-weight: bold;
+	color: var(--title-color);
+}
+
+.container__direction{
+    width: 100%;
+    height: 80%;
+}
+
+.container__text{
+    background-color: var(--bg-color-alt);
+    width: 100%;
+    height: 100%;
+    color: var(--white);
+    font-size: var(--body-font-size);
+    font-family: var(--body-font);
+    padding: 1rem;
+    border: 1px solid var(--border-text-area);
+    border-radius: 5px;
+    resize: none;
+}
+
+.container__buttons{
+    display: flex;
+    justify-content: space-around;
+    margin: 1rem 0;
+}
+
+.buttons{
+    background-color: var(--enterprise-color-400);
+    border: none;
+    border-radius: 5px;
+    width: 10rem;
+    height: 3rem;
+    font-size: 1rem;
+    color: var(--white);
+    cursor: pointer;
+}
+
+.buttons:hover{
+    transform: scale(1.04);
+}
+

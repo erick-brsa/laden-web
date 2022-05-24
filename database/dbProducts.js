@@ -175,14 +175,12 @@ export const getProductsByDate = async () => {
     return JSON.parse(JSON.stringify(products));
 }
 
-export const getProductsBySeller = async (id) => {
+export const getProductsBySeller = async (id) =>{
     await prisma.$connect();
     const products = await prisma.product.findMany({
-        include: { review: { select: { id: true } } },
-        where: { sellerId: id },
-    });
-    await products.map(product => getRating(product));
-
+        include: { review: true }, 
+        where: { sellerId: id }
+    })
     await prisma.$disconnect();
-    return res.status(200).json(products);
+    return JSON.parse(JSON.stringify(products));
 }

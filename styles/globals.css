@@ -28,6 +28,7 @@
 :root {
 	--white: #fff;
 	--black: #000;
+	--border-text-area: var(--white);
 }
 /** ======== MAIN ======== **/
 :root {
@@ -138,6 +139,7 @@
 		--scrollbar-color: #606060;
 		--scrollbar-color-hover: #909090;
 		--link-color: var(--main-color-400);
+		--border-text-area: var(--light-color);
 	}
 }
 

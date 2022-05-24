@@ -5,10 +5,10 @@ import { StarIcon as StarIconSolid } from '@heroicons/react/solid'
 import { StarIcon as StarIconOutline } from '@heroicons/react/outline'
 import styles from "/styles/modules/ProductCard.module.css";
 
-export const ProductCard = ({ name, price, slug, images, rating, review }) => {
+export const ProductCard = ({ name, price, slug, images, rating, review, seller }) => {
     return (
         <article className={styles["product__card"]}>
-            <Link href={`/product/${slug}`}>
+            <Link href={seller ? `/seller/product/${slug}` : `/product/${slug}`}>
                 <a className={styles["product__link"]}>
                     <div className={styles["product__content"]}>
                         <div className={styles["product__image"]}>

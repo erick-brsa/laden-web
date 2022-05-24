@@ -21,17 +21,12 @@ const getRating = async (product) => {
 }
 
 const getProductsBySeller = async (req, res) => {
-
     await prisma.$connect();
-
     const products = await prisma.product.findMany({
         include: { review: { select: { id: true } } },
         where: { sellerId: 5 },
     });
-    
     await products.map(product => getRating(product));
-
     await prisma.$disconnect();
-
     return res.status(200).json(products);
 }

@@ -166,6 +166,16 @@
 	gap: 1rem;
 }
 
+.sent__button{
+	background-color: var(--main-color-400);
+	border: none;
+	border-radius: 5px;
+	width: 5rem;
+	height: 2rem;
+	color: var(--white);
+	
+}
+
 @media (min-width: 768px) {
     .container__product-comments {
         width: 60%;
@@ -181,9 +191,15 @@
 	padding: 1rem;
 }
 
+.container__button-sent{
+	display: flex;
+	justify-content: end;
+}
+
 .text__new-comment{
     background-color: #fff;
     padding: 1rem;
+	resize: none;
 }
 
 .text__new-comment {

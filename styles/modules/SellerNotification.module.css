@@ -3,8 +3,11 @@
 	flex-direction: column;
 	display: flex;
 	gap: 1rem;
-	margin-top: 1rem;
+}
 
+.section__title{
+    margin-bottom: 1rem;
+    margin-top: -1rem;
 }
 
 .notification {
@@ -56,8 +59,8 @@
 .container__page{
     position: absolute;
     width: 83%;
+    top: 0;
     left: calc(70px + 156px);
-    top: 10;
     padding: 2rem 3rem;
     display: flex;
     flex-direction: column;
