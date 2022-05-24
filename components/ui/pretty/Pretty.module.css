@@ -1,0 +1,32 @@
+.banner {
+	position: relative;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	width: 100%;
+	z-index: 1;
+}
+
+.banner img {
+    width: 100%;
+	object-fit: cover;
+	height: 175px;
+	filter: brightness(0.5);
+}
+
+@media (min-width: 768px) {
+    .banner img {
+        height: 200px;
+    }
+}
+
+@media (min-width: 1440px) {
+    .banner img {
+        height: 225px;
+    }
+}
+
+.banner__title {
+	color: var(--white);
+	position: absolute;
+}

@@ -168,14 +168,14 @@ export const ShoppingHeader = () => {
                                 </Link>
                             </li>
                             <li className={styles["secondary-nav__item"]}>
-                                <Link href="/team">
+                                <Link href="/kisin/about">
                                     <a className={styles["secondary-nav__link"]}>
                                         Conócenos
                                     </a>
                                 </Link>
                             </li>
                             <li className={styles["secondary-nav__item"]}>
-                                <Link href="/seller">
+                                <Link href="/kisin/services">
                                     <a className={styles["secondary-nav__link"]}>
                                         Servicios
                                     </a>
@@ -194,4 +194,25 @@ export const ShoppingHeader = () => {
             </div>
         </header>
     )
+}
+
+export const getServerSideProps = async (context) => {
+    
+    const session = await getSession(context)
+    
+    if (!session) return {
+        redirect: {
+            destination: "/auth/login",
+            permanent: false
+        }
+    }
+
+    const user = await getUserById(session.user.id)
+
+    return {
+        props: {
+            session,
+            user
+        }
+    }
 }

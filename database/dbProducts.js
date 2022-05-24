@@ -51,7 +51,7 @@ export const getProductBySlug = async (slug) => {
     await prisma.$connect();
     const product = await prisma.product.findUnique({
         where: { slug },
-        include: { review: true, category: true, subcategory: true  }
+        include: { review: true, category: true, subcategory: true }
     });
     await getRating(product);
     await prisma.$disconnect();

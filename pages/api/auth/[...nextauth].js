@@ -2,8 +2,8 @@ import NextAuth from 'next-auth';
 import GoogleProvider from 'next-auth/providers/google';
 import Credentials from 'next-auth/providers/credentials';
 import GitHubProvider from 'next-auth/providers/github';
-import { PrismaAdapter } from '@next-auth/prisma-adapter';
-import { checkUserEmailPassword, prisma } from '../../../database'
+// import { PrismaAdapter } from '@next-auth/prisma-adapter';
+import { checkUserEmailPassword, oAUthToDbUser } from '../../../database'
 
 export default NextAuth({
 	providers: [
@@ -35,7 +35,7 @@ export default NextAuth({
 	// },
 
 	jwt: {
-		// secret: process.env.NEXTAUTH_SECRET,
+		secret: process.env.NEXTAUTH_SECRET,
 	},
 
 	session: {
@@ -58,7 +58,7 @@ export default NextAuth({
 						break;
 
 					case 'oauth':
-						token.user = await dbUsers.oAUthToDbUser( user?.email || '', user?.name || '' );
+						token.user = await oAUthToDbUser(user?.email || '', user?.name || '');
 						break;
 				}
 			}
@@ -73,6 +73,6 @@ export default NextAuth({
 		},
 	},
 
-	adapter: PrismaAdapter(prisma),
+	// adapter: PrismaAdapter(prisma),
 	secret: process.env.SECRET,
 });

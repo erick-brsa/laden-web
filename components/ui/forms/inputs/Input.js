@@ -5,7 +5,7 @@ export const Input = ({ type, value, variant, placeholder }) => {
             value={value}
             variant={variant}
             placeholder={placeholder}
-            className={`input-${variant}`}
+            // className={`input-${variant}`}
         />
     )
 }
