@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 import { ShoppingLayout } from "../../components/layouts";
 import { ProductCarousel } from "../../components/products";
 import {
@@ -17,9 +18,7 @@ import { formatCurrency } from "../../helpers";
 import styles from "../../styles/modules/ProductPage.module.css";
 
 const ProductPage = ({ product, moreProducts }) => {
-	console.log(product);
-	const { name, price, images, specifications, inStock, review, tags, rating } =
-		product;
+	const { name, price, images, specifications, inStock, review, rating } = product;
 
 	return (
 		<ShoppingLayout
@@ -132,7 +131,7 @@ const ProductPage = ({ product, moreProducts }) => {
 							<h4 className={styles["subtitle__text"]}>Especificaciones</h4>
 							<div className={styles["container__list"]}>
 								<ul>
-									{product.specifications.map((specification, index) => (
+									{specifications.map((specification, index) => (
 										<li key={index} className={styles["specifications"]}>
 											{specification}
 										</li>

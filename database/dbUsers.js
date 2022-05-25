@@ -52,7 +52,7 @@ export const oAUthToDbUser = async (oAuthEmail, oAuthName) => {
             email: oAuthEmail,
             name: oAuthName,
             password: '',
-            image: 'https://ui-avatars.com/api/?size=500&background=414b9a&color=fff&bold=true&name=' + oAuthName.toLocaleLowerCase(),
+            image: 'https://ui-avatars.com/api/?size=500&background=047857&color=fff&bold=true&name=' + oAuthName.toLocaleLowerCase(),
         }
     });
 

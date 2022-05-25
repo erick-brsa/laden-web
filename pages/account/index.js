@@ -1,6 +1,6 @@
 /* eslint-disable @next/next/no-img-element */
 import { getSession, useSession, signOut } from 'next-auth/react';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { ShoppingLayout } from '/components/layouts';
 import { Banner } from '/components/ui/pretty';
@@ -10,13 +10,14 @@ import styles from './Account.module.css';
 
 const AccountPage = ({ user }) => {
 
-	const [name, setName] = useState('');
-	const [email, setEmail] = useState('');
+	const [name, setName] = useState(user.name);
+	const [email, setEmail] = useState(user.email);
 	const [password, setPassword] = useState('');
 	const [passwordConfirm, setPasswordConfirm] = useState('');
-	const [image, setImage] = useState('');
-
-
+	const [image, setImage] = useState(user.image);
+	const [phone, setPhone] = useState(user.phoneNumber);
+	const [error, setError] = useState(false);
+	const [editEnabled, setEditEnabled] = useState(false);
 
 	return (
 		<ShoppingLayout
@@ -33,7 +34,7 @@ const AccountPage = ({ user }) => {
 						<div className={styles["account"]}>
 							<div className={styles["account__image"]}>
 								<img
-									src={user.image}
+									src={image}
 									alt={user.name}
 									className={styles["account__image__avatar"]}
 								/>
@@ -51,7 +52,9 @@ const AccountPage = ({ user }) => {
 												name="name"
 												id="name"
 												placeholder=" "
-												value={user.name}
+												value={name}
+												onChange={(e) => setName(e.target.value)}
+												disabled={!editEnabled}
 											/>
 											<label htmlFor="name" className={styles["formulario__label"]}>
 												{user.role === 'vendedor' ? 'Razón social' : 'Nombre'}
@@ -66,7 +69,9 @@ const AccountPage = ({ user }) => {
 												name="email"
 												id="email"
 												placeholder=" "
-												value={user.email}
+												value={email}
+												onChange={(e) => setEmail(e.target.value)}
+												disabled={!editEnabled}
 											/>
 											<label htmlFor="email" className={styles["formulario__label"]}>Correo electronico</label>
 										</div>
@@ -82,7 +87,9 @@ const AccountPage = ({ user }) => {
 												name="tel"
 												id="tel"
 												placeholder=" "
-												// value={}
+												value={phone}
+												disabled={!editEnabled}
+												onChange={(e) => setPhone(e.target.value)}
 											/>
 											<label htmlFor="tel" className={styles["formulario__label"]}>Teléfono</label>
 										</div>
@@ -90,69 +97,73 @@ const AccountPage = ({ user }) => {
 											El correo no es válido.
 										</p> */}
 									</div>
-									<div className={styles["formulario__grupo"]}>
-										<div className={styles["formulario__grupo-input"]}>
-											<input
-												type="password"
-												className={styles["formulario__input"]}
-												name="password"
-												id="password"
-												placeholder=" "
-											/>
-											<label htmlFor="email" className={styles["formulario__label"]}>Contraseña</label>
-										</div>
-										{/* <p className={styles["formulario__input-error"]}>
+									{editEnabled && (
+										<>
+											<div className={styles["formulario__grupo"]}>
+												<div className={styles["formulario__grupo-input"]}>
+													<input
+														type="password"
+														className={styles["formulario__input"]}
+														name="password"
+														id="password"
+														placeholder=" "
+													/>
+													<label htmlFor="email" className={styles["formulario__label"]}>Contraseña</label>
+												</div>
+												{/* <p className={styles["formulario__input-error"]}>
 											El correo no es válido.
 										</p> */}
-									</div>
-									<div className={styles["formulario__grupo"]}>
-										<div className={styles["formulario__grupo-input"]}>
-											<input
-												type="password"
-												className={styles["formulario__input"]}
-												name="password"
-												id="password"
-												placeholder=" "
-											/>
-											<label htmlFor="email" className={styles["formulario__label"]}>Confirmar contraseña</label>
-										</div>
-										{/* <p className={styles["formulario__input-error"]}>
+											</div>
+											<div className={styles["formulario__grupo"]}>
+												<div className={styles["formulario__grupo-input"]}>
+													<input
+														type="password"
+														className={styles["formulario__input"]}
+														name="passwordConfirm"
+														id="passwordConfirm"
+														placeholder=" "
+													/>
+													<label htmlFor="email" className={styles["formulario__label"]}>Confirmar contraseña</label>
+												</div>
+												{/* <p className={styles["formulario__input-error"]}>
 											El correo no es válido.
 										</p> */}
-									</div>
-								<div className={styles["account__buttons"]}>
-									<button
-										onClick={() => signOut()}
-										className={styles["account__signout"]}
-									>
-										Cerrar sesión
-									</button>
-									<button
-										// onClick={() => signOut()}
-										className={styles["account__signout"]}
-									>
-										Editar cuenta
-									</button>
-									{user.role === 'vendedor' ? (
-										<Link href="/seller">
-											<a
-												className={styles["account__signout"]}
-											>
-												Administra tus productos
-											</a>
-										</Link>
-
-									) : (
-										<Link href="/auth/register_seller">
-											<a
-												className={styles["account__signout"]}
-											>
-												Hazte vendedor
-											</a>
-										</Link>
-
+											</div>
+										</>
 									)}
-								</div>
+									<div className={styles["account__buttons"]}>
+										<button
+											onClick={() => signOut()}
+											className={styles["account__signout"]}
+										>
+											Cerrar sesión
+										</button>
+										<button
+											// onClick={() => signOut()}
+											className={styles["account__signout"]}
+										>
+											Editar cuenta
+										</button>
+										{user.role === 'vendedor' ? (
+											<Link href="/seller">
+												<a
+													className={styles["account__signout"]}
+												>
+													Administra tus productos
+												</a>
+											</Link>
+
+										) : (
+											<Link href="/auth/register_seller">
+												<a
+													className={styles["account__signout"]}
+												>
+													Hazte vendedor
+												</a>
+											</Link>
+
+										)}
+									</div>
 								</form>
 
 							</div>

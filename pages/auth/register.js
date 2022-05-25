@@ -23,7 +23,6 @@ const RegisterPage = () => {
         email: /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/,
     }
 
-
     const handleSubmit = async (e) => {
         e.preventDefault();
         if (Object.values(fields).every(field => field.match(expressions[field.name]) && field.length > 0)) {

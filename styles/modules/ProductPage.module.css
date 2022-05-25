@@ -247,7 +247,7 @@
 
 .user__name {
 	font-weight: bold;
-	color: var(--white);
+	color: var(--title-color);
 }
 
 .text__comment {
