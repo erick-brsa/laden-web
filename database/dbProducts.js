@@ -144,7 +144,18 @@ export const getProductsByPriceRange = async (lowPrice, highPrice) => {
 export const getProductsByTerm = async (term) => {
     await prisma.$connect();
     const products = await prisma.product.findMany({
-
+        where: {
+            OR: [
+                { name: { contains: term } },
+                { description: { contains: term } },
+                { category: { name: { contains: term } } },
+                { subcategory: { name: { contains: term } } },
+                // { tags: {  array_contains: term} },
+            ],
+        },
+        include: {
+            review: true
+        }
     });
     await prisma.$disconnect();
 

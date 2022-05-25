@@ -579,3 +579,16 @@ img {
 		--bg-color-form: var(--bg-color-alt);
 	}
 }
+
+/** ================ SEARCH ================  **/
+
+@media (prefers-color-scheme: light){
+	:root {
+		--search-term: var(--main-color-400);	
+	}
+}
+@media (prefers-color-scheme: dark){
+	:root {
+		--search-term: var(--main-color-200);	
+	}
+}

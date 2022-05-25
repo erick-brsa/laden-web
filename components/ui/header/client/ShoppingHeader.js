@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useRouter } from 'next/router';
 import Link from 'next/link';
 import { MenuIcon } from '@heroicons/react/solid';
 import { ChevronRightIcon } from '@heroicons/react/solid';
@@ -6,15 +7,14 @@ import styles from '/styles/modules/Header.module.css';
 
 export const ShoppingHeader = () => {
 
-    const [isOpen, setIsOpen] = useState(false)
+    const [isOpen, setIsOpen] = useState(false);
+    const [search, setSearch] = useState('')
 
-    const handleOpenMenu = () => {
-        setIsOpen(true)
-    }
+    const router = useRouter()
 
-    const handleCloseMenu = () => {
-        setIsOpen(false)
-    }
+    const handleOpenMenu = () => { setIsOpen(true); }
+
+    const handleCloseMenu = () => { setIsOpen(false); }
 
     return (
         <header className="header" id="header">
@@ -40,7 +40,18 @@ export const ShoppingHeader = () => {
                         </a>
                     </Link>
                     <div className={styles["main-nav__search"]}>
-                        <input type="search" id="search" placeholder="Buscar" />
+                        <input
+                            type="search"
+                            id="search"
+                            placeholder="Buscar"
+                            value={search}
+                            onChange={(e) => setSearch(e.target.value)}
+                            onKeyDown={(e) => {
+                                if (e.key === 'Enter' && search.length > 0) {
+                                    router.push(`/search/${search}`);
+                                }
+                            }}
+                        />
                         <MenuIcon
                             className={styles["main-menu-toggle"]}
                             onClick={handleOpenMenu}
@@ -197,9 +208,9 @@ export const ShoppingHeader = () => {
 }
 
 export const getServerSideProps = async (context) => {
-    
+
     const session = await getSession(context)
-    
+
     if (!session) return {
         redirect: {
             destination: "/auth/login",
