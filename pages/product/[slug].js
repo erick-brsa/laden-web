@@ -1,15 +1,24 @@
-import { ShoppingLayout } from '../../components/layouts';
-import { ProductCarousel } from '../../components/products';
-import { getProductBySlug, getProductsByCategoryAndSubcategory } from '../../database';
-import { StarIcon as StarIconSolid, HeartIcon as HeartIconSolid } from "@heroicons/react/solid";
-import { StarIcon as StarIconOutline, HeartIcon as HeartIconOutline } from "@heroicons/react/outline";
-import { formatCurrency } from '../../helpers'
+/* eslint-disable @next/next/no-img-element */
+import { ShoppingLayout } from "../../components/layouts";
+import { ProductCarousel } from "../../components/products";
+import {
+	getProductBySlug,
+	getProductsByCategoryAndSubcategory,
+} from "../../database";
+import {
+	StarIcon as StarIconSolid,
+	HeartIcon as HeartIconSolid,
+} from "@heroicons/react/solid";
+import {
+	StarIcon as StarIconOutline,
+	HeartIcon as HeartIconOutline,
+} from "@heroicons/react/outline";
+import { formatCurrency } from "../../helpers";
 
-import styles from '../../styles/modules/ProductPage.module.css';
+import styles from "../../styles/modules/ProductPage.module.css";
 
 const ProductPage = ({ product, moreProducts }) => {
-	console.log(product)
-	const { name, price, images, specifications, inStock, review, tags, rating } = product;
+	const { name, price, images, specifications, inStock, review, rating } = product;
 
 	return (
 		<ShoppingLayout
@@ -30,9 +39,7 @@ const ProductPage = ({ product, moreProducts }) => {
 						<div className={styles["container__product-options"]}>
 							<div className={styles["container__name-product"]}>
 								<div>
-									<h3 className={styles["title__text"]}>
-										{product.name}
-									</h3>
+									<h3 className={styles["title__text"]}>{product.name}</h3>
 								</div>
 								<div>
 									<HeartIconOutline
@@ -59,23 +66,20 @@ const ProductPage = ({ product, moreProducts }) => {
 									</div>
 								</div>
 								<button className={styles["link__opinions"]}>
-									{review.length == 0 ? 'Sin opiniones'
-										: review.length == 1 ? `${review.length} opinión`
-											: `${review.length} opiniones`
-									}
+									{review.length == 0
+										? "Sin opiniones"
+										: review.length == 1
+										? `${review.length} opinión`
+										: `${review.length} opiniones`}
 								</button>
 							</div>
 
 							<div className={styles["container__info"]}>
 								<div className={styles["container__price"]}>
-									<p className={styles["price"]}>
-										{formatCurrency(price)}
-									</p>
+									<p className={styles["price"]}>{formatCurrency(price)}</p>
 								</div>
 
-								<p className={styles["disponible"]}>
-									Disponibles: {inStock}
-								</p>
+								<p className={styles["disponible"]}>Disponibles: {inStock}</p>
 								<div className={styles["contador"]}>
 									<select className="select__cont" name="" id="">
 										{/* {
@@ -127,11 +131,8 @@ const ProductPage = ({ product, moreProducts }) => {
 							<h4 className={styles["subtitle__text"]}>Especificaciones</h4>
 							<div className={styles["container__list"]}>
 								<ul>
-									{product.specifications.map((specification, index) => (
-										<li
-											key={index}
-											className={styles["specifications"]}
-										>
+									{specifications.map((specification, index) => (
+										<li key={index} className={styles["specifications"]}>
 											{specification}
 										</li>
 									))}
@@ -155,9 +156,9 @@ const ProductPage = ({ product, moreProducts }) => {
 							<div className={styles["container__comment"]}>
 								<p className={styles["user__name"]}>Mr. Beast</p>
 								<p className={styles["text__comment"]}>
-									Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ducimus,
-									iste! Tenetur voluptatem repellendus officiis earum exercitationem
-									corrupti aperiam. Nihil, nam.
+									Lorem ipsum dolor, sit amet consectetur adipisicing elit.
+									Ducimus, iste! Tenetur voluptatem repellendus officiis earum
+									exercitationem corrupti aperiam. Nihil, nam.
 								</p>
 								<p className={styles["name_product"]}>Laptop Note book 15</p>
 								<div className={styles["time"]}>Hace 20 minutos</div>
@@ -166,10 +167,13 @@ const ProductPage = ({ product, moreProducts }) => {
 						<div className={styles["container__new-comment"]}>
 							<div className={styles["new__comment"]}>
 								<textarea
-									name='comment'
+									name="comment"
 									className={styles["text__new-comment"]}
 									placeholder="Agregar comentario"
 								></textarea>
+								<div className={styles["container__button-sent"]}>
+									<button className={styles["sent__button"]}>Enviar</button>
+								</div>
 							</div>
 						</div>
 					</div>
@@ -182,27 +186,32 @@ const ProductPage = ({ product, moreProducts }) => {
 				/>
 			</section>
 		</ShoppingLayout>
-	)
-}
+	);
+};
 
 export const getServerSideProps = async ({ query }) => {
 	const { slug } = query;
 	const product = await getProductBySlug(slug);
 
-	if (!product) return {
-		redirect: {
-			statusCode: 301,
-			destination: '/',
-		}
-	}
+	if (!product)
+		return {
+			redirect: {
+				statusCode: 301,
+				destination: "/",
+			},
+		};
 
-	const moreProducts = await getProductsByCategoryAndSubcategory(product.category, product.subcategory);
+	const moreProducts = await getProductsByCategoryAndSubcategory(
+		product.category,
+		product.subcategory
+	);
 
 	return {
 		props: {
-			product, moreProducts
-		}
-	}
-}
+			product,
+			moreProducts,
+		},
+	};
+};
 
-export default ProductPage
+export default ProductPage;

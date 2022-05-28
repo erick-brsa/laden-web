@@ -28,6 +28,7 @@
 :root {
 	--white: #fff;
 	--black: #000;
+	--border-text-area: var(--white);
 }
 /** ======== MAIN ======== **/
 :root {
@@ -138,6 +139,7 @@
 		--scrollbar-color: #606060;
 		--scrollbar-color-hover: #909090;
 		--link-color: var(--main-color-400);
+		--border-text-area: var(--light-color);
 	}
 }
 
@@ -504,5 +506,76 @@ img {
 @media (prefers-color-scheme: dark) {
 	:root {
 		--bg-notification-color: var(--bg-color-alt);
+	}
+}
+
+/** ================ REGISTRO ================  **/
+
+@media (prefers-color-scheme: light){
+	:root {
+		--bg-form: var(--white);
+        --error-color: var(--red-700);
+        --successful-validation: var(--green-600);
+        --input-color: var(--main-color-400);
+        --error-color: var(--red-600);
+        --input-text-color: var(--title-color);
+    }
+    
+}
+@media (prefers-color-scheme: dark){
+	:root {
+		--bg-form: var(--bg-color);
+        --error-color: var(--red-500);
+        --successful-validation: var(--green-500);
+        --input-color: var(--main-color-100);
+        --error-color: var(--red-400);
+        --input-text-color: var(--title-color);
+    }
+}
+
+/** ================ REGISTRO VENDEDOR ================  **/
+
+/* @media (prefers-color-scheme: light){
+    :root {
+		--bg-form: var(--white);
+        --error-color: var(--red-700);
+        --successful-validation: var(--green-600);
+        --link-color: var(--enterprise-color-400);
+        --input-color: var(--text-color);
+        --error-color: var(--red-700);
+        --input-text-color: var(--title-color);
+
+        --main-nav-color-seller-desktop: var(--enterprise-color-500);
+		--main-nav-color-seller: var(--enterprise-color-50);
+    }
+    
+}
+@media (prefers-color-scheme: dark){
+	:root {
+		--bg-form: var(--bg-color);
+        --error-color: var(--red-500);
+        --successful-validation: var(--green-500);
+        --link-color: var(--title-color);
+        --input-color: var(--text-color);
+        --error-color: var(--red-400);
+        --input-text-color: var(--title-color);
+		
+        --main-nav-color-seller-desktop: var(--bg-color-alt);
+		--main-nav-color-seller: var(--bg-color-alt);
+    }
+} */
+
+/** ================ REGISTRO VENDEDOR ================  **/
+
+@media (prefers-color-scheme: light){
+	:root {
+		--bg-color-account: var(--white);
+		--bg-color-form: var(--white);
+	}
+}
+@media (prefers-color-scheme: dark){
+	:root {
+		--bg-color-account: var(--bg-color-alt);
+		--bg-color-form: var(--bg-color-alt);
 	}
 }
