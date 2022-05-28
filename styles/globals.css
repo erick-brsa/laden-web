@@ -139,6 +139,7 @@
 		--scrollbar-color: #606060;
 		--scrollbar-color-hover: #909090;
 		--link-color: var(--main-color-400);
+		--link-enterprise-color: var(--enterprise-color-500);
 		--border-text-area: var(--light-color);
 	}
 }
@@ -155,6 +156,7 @@
 		--scrollbar-color: #aaaaaa;
 		--scrollbar-color-hover: #717171;
 		--link-color: var(--main-color-100);
+		--link-enterprise-color: var(--title-color);
 	}
 }
 
@@ -299,6 +301,16 @@ img {
 	fill: var(--title-color);
 }
 
+.title-alt {
+	fill: var(--black);
+}
+
+@media (min-width: 769px) {
+	.title-alt {
+		fill: var(--white)
+	}
+}
+
 .text {
 	fill: var(--text-color);
 }
@@ -353,11 +365,11 @@ img {
 }
 
 /** ================ LOGO ================ **/
-.main-nav__logo-svg .title {
+.title {
 	fill: var(--main-nav-logo-title);
 }
 
-.main-nav__logo-svg .text {
+.text {
 	fill: var(--main-nav-logo-text);
 }
 
@@ -519,6 +531,7 @@ img {
         --input-color: var(--main-color-400);
         --error-color: var(--red-600);
         --input-text-color: var(--title-color);
+		--main-nav-seller-color: var(--enterprise-color-500);
     }
     
 }
@@ -530,6 +543,7 @@ img {
         --input-color: var(--main-color-100);
         --error-color: var(--red-400);
         --input-text-color: var(--title-color);
+		--main-nav-seller-color: var(--bg-color-alt);
     }
 }
 
