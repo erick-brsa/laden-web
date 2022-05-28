@@ -1,7 +1,3 @@
-
-/*============  Variables  =============*/
-
-
 /*============  Barra Lateral  =============*/
 .l-navbar{
     position: fixed;
@@ -239,3 +235,163 @@
     transform: scale(1.04);
 }
 
+
+
+/*============  Estilos de nuevo producto  =============*/
+.container__form{
+    background-color: var(--bg-color-alt);
+    width: 90%;
+    margin: 0 auto;
+    border-radius: 1rem;
+    padding: 4rem;
+}
+
+.container__camps{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    align-items: center;
+    box-sizing: border-box;
+}
+
+.title__label{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
+    font-size: var(--h4-font-size);
+    align-items: center;
+}
+
+.title{
+    font-weight: bolder;
+    color: var(--white);
+}
+
+.input__label{
+    width: 90%;
+    height: 30px;
+    border-radius: 5px;
+    padding: 1rem;
+    font-size: var(--regular-font-size);
+}
+
+.container__price-stock{
+    width: 100%;
+    display: flex;
+    gap: 2rem;
+    justify-content: space-between;
+}
+
+.container__description{
+    width: 100%;
+    font-size: var(--h4-font-size);
+    display: flex;
+    gap: 1rem;
+}
+
+.textarea{
+    width: 100%;
+    padding: 1rem;
+    font-size: var(--regular-font-size);
+    resize: none;
+    border-radius: 5px;
+}
+
+.input__select{
+    width: 90%;
+    height: 40px;
+    border-radius: 5px;
+    font-size: var(--regular-font-size);
+}
+
+.buttons__actions{
+    display: flex;
+    gap: 2rem;
+}
+
+/*============  Imagen  =============*/
+.container__imgs{
+    width: 430px;
+    height: 350px;
+    margin-bottom: 4rem;
+}
+
+.container__img-actions .wrapper{
+    position: relative;
+    height: 300px;
+    width: 100%;
+    border-radius: 10px;
+    background: transparent;
+    border: 2px dashed var(--enterprise-color-400);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.wrapper .image{
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.wrapper .image .img__upload{
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+}
+
+.wrapper .icon{
+   color: var(--enterprise-color-400); 
+}
+
+.icon{
+    position: relative;
+    display: flex;
+    justify-content: center;
+    margin-bottom: 1rem;
+}
+
+#default-btn{
+    visibility: hidden;
+}
+
+.wrapper .text{
+    font-size: 20px;
+    font-weight: 500;   
+}
+
+.wrapper #cancel-btn{
+    position: absolute;
+    right: 15px;
+    top: 15px;
+    font-size: 20px;
+    cursor: pointer;
+}
+
+.title__img{
+    font-size: var(--h4-font-size);
+    font-weight: bolder;
+    color: var(--white);
+    margin-bottom: 1rem;
+}
+
+.container__imgs #custom-btn{
+    width: 100%;
+    height: 50px;
+    display: block;
+    border: none;
+    border-radius: 5px;
+    color: var(--white);
+    font-size: 18px;
+    font-weight: 500;
+    letter-spacing: 1px;
+    background: var(--enterprise-color-400);
+    cursor: pointer;
+}
