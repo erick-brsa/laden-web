@@ -1,5 +1,5 @@
 import styles from "../../styles/modules/Seller.module.css";
-import { ProductCard, ProductCarousel } from "../../components/products";
+import { ProductCarousel } from "../../components/products";
 import { SellerLayout } from "../../components/layouts/SellerLayout";
 import { getProductsBySeller } from "../../database";
 
