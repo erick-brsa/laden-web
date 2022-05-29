@@ -144,7 +144,21 @@ export const getProductsByPriceRange = async (lowPrice, highPrice) => {
 export const getProductsByTerm = async (term) => {
     await prisma.$connect();
     const products = await prisma.product.findMany({
-
+        where: {
+            OR: [
+                { name: { contains: term } },
+                { description: { contains: term } },
+                { category: { name: { contains: term } } },
+                { subcategory: { name: { contains: term } } },
+                { tags: { equals: term } },
+            ],
+            // name: {
+            // in: term
+            // }
+        },
+        include: {
+            review: true
+        }
     });
     await prisma.$disconnect();
 
@@ -175,10 +189,10 @@ export const getProductsByDate = async () => {
     return JSON.parse(JSON.stringify(products));
 }
 
-export const getProductsBySeller = async (id) =>{
+export const getProductsBySeller = async (id) => {
     await prisma.$connect();
     const products = await prisma.product.findMany({
-        include: { review: true }, 
+        include: { review: true },
         where: { sellerId: id }
     })
     await prisma.$disconnect();
