@@ -12,12 +12,17 @@ const AccountPage = ({ user }) => {
 
 	const [name, setName] = useState(user.name);
 	const [email, setEmail] = useState(user.email);
+	const [phone, setPhone] = useState(user.phoneNumber);
 	const [password, setPassword] = useState('');
 	const [passwordConfirm, setPasswordConfirm] = useState('');
 	const [image, setImage] = useState(user.image);
-	const [phone, setPhone] = useState(user.phoneNumber);
 	const [error, setError] = useState(false);
 	const [editEnabled, setEditEnabled] = useState(false);
+
+	const handleUpdate = async () => {
+		e.preventDefault();
+
+	}
 
 	return (
 		<ShoppingLayout
@@ -40,9 +45,6 @@ const AccountPage = ({ user }) => {
 								/>
 							</div>
 							<div className={styles["account__info"]}>
-								{/* <h2 className={styles["account__name"]}>{user.name}</h2>
-								<h4 className={styles["account__email"]}>{user.email}</h4> */}
-
 								<form className={styles["formulario"]}>
 									<div className={styles["formulario__grupo"]}>
 										<div className={styles["formulario__grupo-input"]}>
@@ -138,12 +140,25 @@ const AccountPage = ({ user }) => {
 										>
 											Cerrar sesión
 										</button>
-										<button
-											// onClick={() => signOut()}
-											className={styles["account__signout"]}
-										>
-											Editar cuenta
-										</button>
+										{
+											editEnabled ? (
+												<button
+													type="button"
+													onClick={() => setEditEnabled(false)}
+													className={styles["account__signout"]}
+												>
+													Guardar cambios
+												</button>
+											) : (
+												<button
+													type="button"
+													onClick={() => setEditEnabled(true)}
+													className={styles["account__signout"]}
+												>
+													Editar cuenta
+												</button>
+											)
+										}
 										{user.role === 'vendedor' ? (
 											<Link href="/seller">
 												<a

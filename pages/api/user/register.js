@@ -5,6 +5,8 @@ export default function hander(req, res) {
     switch (req.method) {
         case 'POST':
             return registerUser(req, res);
+        case 'UPDATE':
+            return updateUser(req, res);
         default:
             return res.status(405).json({
                 message: 'Method not allowed'
@@ -58,4 +60,9 @@ const registerUser = async (req, res) => {
     return res.status(201).json({
         message: 'Usuario creado con éxito',
     });
+}
+
+const updateUser = async (req, res) => {
+    const { name = '', email = '', password = '' } = req.body;
+
 }

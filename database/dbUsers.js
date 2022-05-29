@@ -66,8 +66,15 @@ export const oAUthToDbUser = async (oAuthEmail, oAuthName) => {
 export const getUserById = async (id) => {
     await prisma.$connect();
     const user = await prisma.user.findUnique({
-        select: { id: true, email: true, name: true, phoneNumber: true, role: true, image: true},
-        where: { id },
+        select: { 
+            id: true, 
+            email: true, 
+            name: true, 
+            phoneNumber: true, 
+            role: true, 
+            image: true,
+        },
+        where: { id: id },
     });
     await prisma.$disconnect();
     
