@@ -1,10 +1,11 @@
-import { useState, useEffect } from 'react'
-import { getSession, signIn, signOut } from 'next-auth/react'
-import { SellerAuthLayout } from '../../components/layouts'
-import styles from '../../styles/modules/Login.module.css'
-import { useRouter } from 'next/router'
-import Link from 'next/link'
-import axios from 'axios'
+import { useState } from 'react';
+import { useRouter } from 'next/router';
+import { getSession } from 'next-auth/react';
+import Link from 'next/link';
+import axios from 'axios';
+import { SellerAuthLayout } from '../../components/layouts';
+import { EyeIcon, EyeOffIcon } from '@heroicons/react/solid';
+import styles from '../../styles/modules/seller/register.module.css';
 
 const RegisterSellerPage = ({ session }) => {
 
@@ -12,7 +13,9 @@ const RegisterSellerPage = ({ session }) => {
     const [phone, setPhone] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [seePassword, setSeePassword] = useState(false);
     const [passwordConfirm, setPasswordConfirm] = useState('');
+    const [seePasswordConfirm, setSeePasswordConfirm] = useState(false);
 
     const fields = { name, phone, email, password, passwordConfirm }
 
@@ -52,7 +55,7 @@ const RegisterSellerPage = ({ session }) => {
             title="Laden - Registro de vendedor"
             description="Registro de usuario"
         >
-            <div className={styles["formulario__container"]}>
+            <div className={styles["formulario__container-seller"]}>
                 <form
                     method='POST'
                     className={styles["formulario"]}
@@ -64,15 +67,15 @@ const RegisterSellerPage = ({ session }) => {
                             <input
                                 type="text"
                                 className={styles["formulario__input"]}
-                                name="nombre"
-                                id="nombre"
+                                name="name"
+                                id="name"
                                 placeholder=" "
                                 value={name}
                                 onChange={(e) => setName(e.target.value)}
                                 // onBlur={(e) => console.log("tab")}
                                 autoFocus
                             />
-                            <label htmlFor="nombre" className={styles["formulario__label"]}>Razón social</label>
+                            <label htmlFor="name" className={styles["formulario__label"]}>Razón social</label>
                         </div>
                         <p className={styles["formulario__input-error"]}>
                             El nombre solo debe contener letras o guiones bajos.
@@ -88,7 +91,7 @@ const RegisterSellerPage = ({ session }) => {
                                 placeholder=" "
                                 value={phone}
                                 onChange={(e) => setPhone(e.target.value)}
-                                // onBlur={(e) => console.log("tab")}
+                            // onBlur={(e) => console.log("tab")}
                             />
                             <label htmlFor="phone" className={styles["formulario__label"]}>Teléfono</label>
                         </div>
@@ -118,7 +121,7 @@ const RegisterSellerPage = ({ session }) => {
                             <div className={styles["formulario__grupo"]} id="grupo__contra">
                                 <div className={styles["formulario__grupo-input"]}>
                                     <input
-                                        type="password"
+                                        type={seePassword ? "text" : "password"}
                                         className={styles["formulario__input"]}
                                         name="password"
                                         id="password"
@@ -127,8 +130,21 @@ const RegisterSellerPage = ({ session }) => {
                                         onChange={(e) => setPassword(e.target.value)}
                                     />
                                     <label htmlFor="password" className={styles["formulario__label"]}>Contraseña</label>
-                                    <span>
-                                        <i id="toggle" className="fas fa-eye-slash"></i>
+                                    <span className={styles["formulario__icon-password"]}>
+                                        {seePassword ? (
+                                            <EyeIcon
+                                                onClick={() => setSeePassword(!seePassword)}
+                                                width="1.4rem"
+                                                height="1.4rem"
+                                            />
+                                        ) : (
+
+                                            <EyeOffIcon
+                                                onClick={() => setSeePassword(!seePassword)}
+                                                width="1.4rem"
+                                                height="1.4rem"
+                                            />
+                                        )}
                                     </span>
                                 </div>
                                 <p className={styles["formulario__input-error"]}>
@@ -138,7 +154,7 @@ const RegisterSellerPage = ({ session }) => {
                             <div className={styles["formulario__grupo"]} id="grupo__contra2">
                                 <div className={styles["formulario__grupo-input"]}>
                                     <input
-                                        type="password"
+                                        type={seePasswordConfirm ? "text" : "password"}
                                         className={styles["formulario__input"]}
                                         name="passwordConfirm"
                                         id="passwordConfirm"
@@ -147,8 +163,21 @@ const RegisterSellerPage = ({ session }) => {
                                         onChange={(e) => setPasswordConfirm(e.target.value)}
                                     />
                                     <label htmlFor="passwordConfirm" className={styles["formulario__label"]}>Confirmar contraseña</label>
-                                    <span>
-                                        <i id="toggle1" className="fas fa-eye-slash"></i>
+                                    <span className={styles["formulario__icon-password"]}>
+                                        {seePasswordConfirm ? (
+                                            <EyeIcon
+                                                onClick={() => setSeePasswordConfirm(!seePasswordConfirm)}
+                                                width="1.4rem"
+                                                height="1.4rem"
+                                            />
+                                        ) : (
+
+                                            <EyeOffIcon
+                                                onClick={() => setSeePasswordConfirm(!seePasswordConfirm)}
+                                                width="1.4rem"
+                                                height="1.4rem"
+                                            />
+                                        )}
                                     </span>
                                 </div>
                                 <p className={styles["formulario__input-error"]}>

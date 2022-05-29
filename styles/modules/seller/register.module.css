@@ -42,7 +42,7 @@
 }
 
 .formulario__link {
-	color: var(--link-color);
+	color: var(--link-enterprise-color);
 	font-weight: 700;
 }
 
@@ -59,13 +59,14 @@
 }
 
 .formulario__input {
+    --seller-input-color: var(--enterprise-color-200);
 	position: absolute;
 	width: 100%;
 	height: 100%;
 	top: 0;
 	left: 0;
 	font-size: var(--regular-font-size);
-	border: 2px solid var(--input-color);
+	border: 2px solid var(--text-color);
 	color: var(--input-text-color);
 	background: none;
 	border-radius: 0.5rem;
@@ -150,7 +151,7 @@
 	border-radius: 7px;
 	color: var(--white);
 	font-size: var(--regular-font-size);
-	background: var(--main-color-500);
+	background: var(--enterprise-color-500);
 	font-weight: 700;
 	letter-spacing: 0.5px;
 	margin-bottom: 1rem;
@@ -166,7 +167,7 @@
 
 .formulario__label {
 	font-weight: 700;
-	color: var(--input-color);
+	color: var(--text-color);
 	position: relative;
 	top: 1rem;
 	left: 1rem;
@@ -178,7 +179,7 @@
 	text-transform: capitalize;
 }
 
-.formulario__input#correo {
+.formulario__input#email {
 	text-transform: lowercase;
 }
 
@@ -218,22 +219,4 @@
 
 .formulario__grupo-incorrecto .formulario__input {
 	border: 2px solid var(--error-color);
-}
-
-.formulario__btn-google {
-	all: unset;
-	border: 2px solid var(--main-color-400);
-	padding: 0.5rem;
-	border-radius: 0.5rem;
-	width: 100%;
-	text-align: center;
-	margin-bottom: 1rem;
-	margin-top: 0rem;
-	color: var(--main-color-400);
-	font-weight: 600;
-}
-
-.formulario__btn-google:hover {
-	background-color: var(--main-color-500);
-	color: var(--white);
 }

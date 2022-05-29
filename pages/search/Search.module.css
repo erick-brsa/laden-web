@@ -1,0 +1,4 @@
+.search-query {
+    color: var(--search-term);
+    text-transform: capitalize;
+}

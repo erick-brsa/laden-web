@@ -1,20 +1,24 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { useRouter } from 'next/router';
 import Link from 'next/link';
 import { MenuIcon } from '@heroicons/react/solid';
 import { ChevronRightIcon } from '@heroicons/react/solid';
 import styles from '/styles/modules/Header.module.css';
 
-export const ShoppingHeader = () => {
+export const ShoppingHeader = ({ session }) => {
 
-    const [isOpen, setIsOpen] = useState(false)
+    const [isOpen, setIsOpen] = useState(false);
+    const [search, setSearch] = useState('');
 
-    const handleOpenMenu = () => {
-        setIsOpen(true)
-    }
+    // useEffect(() => {
+    //     setSearch(search.replace(' ', ' '))
+    // }, [search])
 
-    const handleCloseMenu = () => {
-        setIsOpen(false)
-    }
+    const router = useRouter()
+
+    const handleOpenMenu = () => { setIsOpen(true); }
+
+    const handleCloseMenu = () => { setIsOpen(false); }
 
     return (
         <header className="header" id="header">
@@ -22,7 +26,6 @@ export const ShoppingHeader = () => {
                 <nav className={styles["main-nav"]}>
                     <Link href="/">
                         <a className="main-nav__logo">
-
                             <svg
                                 className="main-nav__logo-svg"
                                 width="85"
@@ -40,7 +43,18 @@ export const ShoppingHeader = () => {
                         </a>
                     </Link>
                     <div className={styles["main-nav__search"]}>
-                        <input type="search" id="search" placeholder="Buscar" />
+                        <input
+                            type="search"
+                            id="search"
+                            placeholder="Buscar"
+                            value={search}
+                            onChange={(e) => setSearch(e.target.value)}
+                            onKeyDown={(e) => {
+                                if (e.key === 'Enter' && search.length > 0) {
+                                    router.push(`/search/${search}`);
+                                }
+                            }}
+                        />
                         <MenuIcon
                             className={styles["main-menu-toggle"]}
                             onClick={handleOpenMenu}
@@ -133,26 +147,43 @@ export const ShoppingHeader = () => {
                 <div className={!isOpen ? styles["secondary-nav"] : styles["show-bg-secondary-nav__menu"]} onClick={handleCloseMenu}>
                     <nav className={!isOpen ? styles["secondary-nav__menu"] : styles["show-secondary-nav__menu"]} id="secondary-nav">
                         <ul className={styles["secondary-nav__list"]}>
-                            <li className={styles["secondary-nav__item-profile"]}>
-                                <Link href="/account">
-                                    <a className={styles["secondary-nav__link-profile"]}>
-                                        <div className={styles["link-profile__user-image"]}>
-                                            <img src="https://ui-avatars.com/api/?name=erick" alt="Foto de perfil" />
-                                        </div>
-                                        <div className={styles["link-profile__user-info"]}>
-                                            <span className={styles["profile__user-name"]}>
-                                                Erick Briones
-                                            </span>
-                                            <span className={styles["profile__user-link"]}>
-                                                Ver perfil
-                                            </span>
-                                        </div>
-                                        <div className={styles["link-profile__arrow"]}>
-                                            <ChevronRightIcon height={40} width={40} />
-                                        </div>
-                                    </a>
-                                </Link>
-                            </li>
+                            {session ? (
+                                <li className={styles["secondary-nav__item-profile"]}>
+                                    <Link href="/account">
+                                        <a className={styles["secondary-nav__link-profile"]}>
+                                            <div className={styles["link-profile__user-image"]}>
+                                                <img src="https://ui-avatars.com/api/?name=erick" alt="Foto de perfil" />
+                                            </div>
+                                            <div className={styles["link-profile__user-info"]}>
+                                                <span className={styles["profile__user-name"]}>
+                                                    Erick Briones
+                                                </span>
+                                                <span className={styles["profile__user-link"]}>
+                                                    Ver perfil
+                                                </span>
+                                            </div>
+                                            <div className={styles["link-profile__arrow"]}>
+                                                <ChevronRightIcon height={40} width={40} />
+                                            </div>
+                                        </a>
+                                    </Link>
+                                </li>
+                            ) : (
+                                <li className={styles["secondary-nav__item-profile"]}>
+                                    <Link href="/auth/login">
+                                        <a className={styles["secondary-nav__link-profile"]}>
+                                            <div className={styles["link-profile__user-info"]}>
+                                                <span className={styles["profile__user-name"]}>
+                                                    Iniciar sesión
+                                                </span>
+                                            </div>
+                                            <div className={styles["link-profile__arrow"]}>
+                                                <ChevronRightIcon height={40} width={40} />
+                                            </div>
+                                        </a>
+                                    </Link>
+                                </li>
+                            )}
                             <li className={styles["secondary-nav__item"]}>
                                 <Link href="/categories">
                                     <a className={styles["secondary-nav__link"]}>
@@ -197,9 +228,9 @@ export const ShoppingHeader = () => {
 }
 
 export const getServerSideProps = async (context) => {
-    
+
     const session = await getSession(context)
-    
+
     if (!session) return {
         redirect: {
             destination: "/auth/login",

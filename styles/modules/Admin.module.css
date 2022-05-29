@@ -1,0 +1,64 @@
+/*============  Barra Lateral  =============*/
+.l-navbar{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: calc(70px + 156px);
+    height: 100vh;
+    background-color: var(--admin-color-400);
+    padding: .5rem 1.5rem;
+    transition: 0.5s;
+    z-index: 100;
+}
+
+.nav{
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    overflow: hidden;
+}
+
+.container__logout{
+    margin-bottom: 2rem;
+}
+
+.logout-btn {
+    all: unset;
+}
+
+.nav__logo{
+    margin: 2rem 2.7rem;
+}
+
+.nav__list{
+    display: flex;
+    flex-direction: column;
+    margin-top: 2rem;
+    gap: 1.5rem;
+}
+
+.nav__link{
+    position: relative;
+    color: var(--white);
+    margin-bottom: 1.5rem;
+    transition: .3s;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.nav__link:hover{
+    transform: scale(1.03);
+}
+
+.container__page{
+    position: absolute;
+    width: 83%;
+    left: calc(70px + 156px);
+    top: 0;
+    padding: 2rem 3rem;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}

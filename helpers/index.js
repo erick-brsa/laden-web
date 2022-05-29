@@ -1,3 +1,5 @@
+import Router from 'next/router';
+
 export const formatDate = (date) => {
     const options = {
         year: 'numeric',
@@ -15,4 +17,8 @@ export const formatCurrency = (value) => {
         maximumFractionDigits: 2,
     }
     return new Intl.NumberFormat('es-MX', options).format(value)
+}
+
+export const forceReload = () => {
+    Router.reload()
 }

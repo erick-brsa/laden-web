@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { getSession, signIn } from 'next-auth/react'
 import { ClientAuthLayout } from '../../components/layouts'
+import { EyeIcon, EyeOffIcon } from '@heroicons/react/solid';
 import Link from 'next/link';
 
 import styles from '../../styles/modules/Login.module.css'
@@ -9,6 +10,7 @@ const LoginPage = () => {
 
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [showPassword, setShowPassword] = useState(false);
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -48,7 +50,7 @@ const LoginPage = () => {
                     <div className={styles["formulario__grupo"]} id="grupo__contra">
                         <div className={styles["formulario__grupo-input"]}>
                             <input
-                                type="password"
+                                type={showPassword ? 'text' : 'password'}
                                 className={styles["formulario__input"]}
                                 name="password"
                                 id="password"
@@ -57,8 +59,21 @@ const LoginPage = () => {
                                 onChange={(e) => setPassword(e.target.value)}
                             />
                             <label htmlFor="password" className={styles["formulario__label"]}>Contraseña</label>
-                            <span>
-                                <i id="toggle" className="fas fa-eye-slash"></i>
+                            <span className={styles["formulario__icon-password"]}>
+                                {showPassword ? (
+                                    <EyeIcon
+                                        onClick={() => setShowPassword(!showPassword)}
+                                        width="1.4rem"
+                                        height="1.4rem"
+                                    />
+                                ) : (
+
+                                    <EyeOffIcon
+                                        onClick={() => setShowPassword(!showPassword)}
+                                        width="1.4rem"
+                                        height="1.4rem"
+                                    />
+                                )}
                             </span>
                         </div>
                         <p className={styles["formulario__input-error"]}>
