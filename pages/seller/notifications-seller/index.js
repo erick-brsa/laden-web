@@ -1,6 +1,8 @@
 import { SellerLayout } from "../../../components/layouts/SellerLayout";
 import { NotificationSeller } from "./NotificationSeller";
 import styles from "../../../styles/modules/SellerNotification.module.css"
+import { getSession } from "next-auth/react";
+import { getUserById } from "../../../database";
 
 const SellerNotification = () => {
 	return (
@@ -23,5 +25,23 @@ const SellerNotification = () => {
 		</SellerLayout>
 	);
 };
+
+export const getServerSideProps = async (context) => {
+	const session = await getSession(context)
+	if (!session) return {
+		redirect: { destination: "/auth/login", permanent: false }
+	}
+
+	const user = await getUserById(session.user.id);
+	if (user.role !== "vendedor") return {
+		redirect: { destination: "/", permanent: false }
+	}
+
+	return {
+		props: {
+
+		}
+	};
+}
 
 export default SellerNotification;
