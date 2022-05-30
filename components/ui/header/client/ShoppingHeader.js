@@ -1,18 +1,30 @@
+/* eslint-disable @next/next/no-img-element */
+import { getSession, useSession, signOut } from 'next-auth/react';
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
 import Link from 'next/link';
+
 import { MenuIcon } from '@heroicons/react/solid';
 import { ChevronRightIcon } from '@heroicons/react/solid';
+// import { getUserById } from '/database/dbUsers';
+
 import styles from '/styles/modules/Header.module.css';
 
-export const ShoppingHeader = ({ session }) => {
+export const ShoppingHeader = () => {
+
+    const [user, setUser] = useState(null);
+        
+    const session = useSession();
+
+    useEffect(() => {
+        if(session.status === 'authenticated') {
+            setUser(session.data.user);
+        }
+    }, [session]);
+    
 
     const [isOpen, setIsOpen] = useState(false);
     const [search, setSearch] = useState('');
-
-    // useEffect(() => {
-    //     setSearch(search.replace(' ', ' '))
-    // }, [search])
 
     const router = useRouter()
 
@@ -147,16 +159,16 @@ export const ShoppingHeader = ({ session }) => {
                 <div className={!isOpen ? styles["secondary-nav"] : styles["show-bg-secondary-nav__menu"]} onClick={handleCloseMenu}>
                     <nav className={!isOpen ? styles["secondary-nav__menu"] : styles["show-secondary-nav__menu"]} id="secondary-nav">
                         <ul className={styles["secondary-nav__list"]}>
-                            {session ? (
+                            {user ? (
                                 <li className={styles["secondary-nav__item-profile"]}>
                                     <Link href="/account">
                                         <a className={styles["secondary-nav__link-profile"]}>
                                             <div className={styles["link-profile__user-image"]}>
-                                                <img src="https://ui-avatars.com/api/?name=erick" alt="Foto de perfil" />
+                                                <img src={user.image} alt="Foto de perfil" />
                                             </div>
                                             <div className={styles["link-profile__user-info"]}>
                                                 <span className={styles["profile__user-name"]}>
-                                                    Erick Briones
+                                                    {user.name}
                                                 </span>
                                                 <span className={styles["profile__user-link"]}>
                                                     Ver perfil
@@ -225,25 +237,4 @@ export const ShoppingHeader = ({ session }) => {
             </div>
         </header>
     )
-}
-
-export const getServerSideProps = async (context) => {
-
-    const session = await getSession(context)
-
-    if (!session) return {
-        redirect: {
-            destination: "/auth/login",
-            permanent: false
-        }
-    }
-
-    const user = await getUserById(session.user.id)
-
-    return {
-        props: {
-            session,
-            user
-        }
-    }
 }

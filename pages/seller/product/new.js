@@ -1,8 +1,10 @@
 import styles from "../../../styles/modules/Seller.module.css";
 import { SellerLayout } from "../../../components/layouts/SellerLayout";
 import { CloudUploadIcon, XIcon } from "@heroicons/react/solid";
+import { getSession } from "next-auth/react";
+import { getAllCategories, getAllSubcategories, getUserById } from "../../../database";
 
-const AddNewProduct = () => {
+const NewProductPage = ({ categories }) => {
 	return (
 		<SellerLayout
 			title="Laden - Nuevo Producto"
@@ -20,12 +22,12 @@ const AddNewProduct = () => {
 						<div className={styles["container__price-stock"]}>
 							<label className={styles["title__label"]}>
 								<p className={styles["title"]}>Precio</p>
-								<input type="text" className={styles["input__label"]}></input>
+								<input type="number" className={styles["input__label"]}></input>
 							</label>
 
 							<label className={styles["title__label"]}>
 								<p className={styles["title"]}>Stock</p>
-								<input type="text" className={styles["input__label"]}></input>
+								<input type="number" className={styles["input__label"]}></input>
 							</label>
 						</div>
 
@@ -37,43 +39,50 @@ const AddNewProduct = () => {
 						<label className={styles["title__label"]}>
 							<p className={styles["title"]}>Categoría</p>
 							<select className={styles["input__select"]}>
-								<option>Electronica, audio y video</option>
-								<option>Celulares y telefonía</option>
-								<option>Computación y tecnología</option>
-								<option>Deportes y fitness</option>
-								<option>Hogar y Muebles</option>
-								<option>Instrumentos Musicales</option>
-								<option>Libros, peliculas y música</option>
-								<option>Ropa, bolsas y calzado</option>
-								<option>Salud y Belleza</option>
-								<option>Juegos y Juguets</option>
-								<option>Otras Categorías</option>
+								<option disabled>Selecciona una categoria</option>
+								{categories.map((category) => (
+									<option key={category.id} value={category.id}>
+										{category.name}
+									</option>
+								))}
 							</select>
 						</label>
 
-						<div className={styles["container__imgs"]}>
-							<p className={styles["title__img"]}>Imagenes</p>
-							<div className={styles["container__img-actions"]}>
-								<div className={styles["wrapper"]}>
-									<div className={styles["image"]}>
-										{/* <img className={styles["img__upload"]} src="https://unsplash.com/es/fotos/iWE2gH9n8oU" /> */}
-									</div>
-									<div className={styles["content"]}>
-										<div className={styles["icon"]}>
-											<CloudUploadIcon height={150} width={150} />
+						<label className={styles["title__label"]}>
+							<p className={styles["title"]}>Subategoría</p>
+							<select className={styles["input__select"]}>
+								<option disabled>Selecciona una subcategoria</option>
+								{categories.map((category) => (
+									<option key={category.id} value={category.id}>
+										{category.name}
+									</option>
+								))}
+							</select>
+						</label>
+
+						{/* <div className={styles["container__imgs"]}>
+								<p className={styles["title__img"]}>Imagenes</p>
+								<div className={styles["container__img-actions"]}>
+									<div className={styles["wrapper"]}>
+										<div className={styles["image"]}>
+											<img className={styles["img__upload"]} src="https://unsplash.com/es/fotos/iWE2gH9n8oU" />
 										</div>
-										<div className={styles["text"]}>
-											No se ha eligido ningún archivo
+										<div className={styles["content"]}>
+											<div className={styles["icon"]}>
+												<CloudUploadIcon height={150} width={150} />
+											</div>
+											<div className={styles["text"]}>
+												No se ha eligido ningún archivo
+											</div>
 										</div>
-									</div>
-									<div id={styles["cancel-btn"]}>
-										<XIcon height={24} width={24} />
+										<div className={styles["cancel-btn"]}>
+											<XIcon height={24} width={24} />
+										</div>
 									</div>
 								</div>
-							</div>
-							<input id={styles["default-btn"]} type="file"></input>
-							<button id={styles["custom-btn"]}>Elije un Archivo</button>
-						</div>
+								<input className={styles["default-btn"]} type="file"></input>
+								<button className={styles["custom-btn"]}>Elije un Archivo</button>
+							</div> */}
 
 						<div className={styles["buttons__actions"]}>
 							<button className={styles["buttons"]}>Agregar</button>
@@ -86,4 +95,23 @@ const AddNewProduct = () => {
 	);
 };
 
-export default AddNewProduct;
+export const getServerSideProps = async (context) => {
+	const session = await getSession(context)
+	if (!session) return {
+		redirect: { destination: "/auth/login", permanent: false }
+	}
+
+	const user = await getUserById(session.user.id);
+	if (user.role !== "vendedor") return {
+		redirect: { destination: "/", permanent: false }
+	}
+
+	const categories = await getAllCategories();
+	const subcategories = await getAllSubcategories();
+
+	return {
+		props: { categories, subcategories, user }
+	};
+}
+
+export default NewProductPage;

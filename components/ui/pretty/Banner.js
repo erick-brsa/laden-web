@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 import styles from './Pretty.module.css'
 
 export const Banner = ({ image, title }) => {

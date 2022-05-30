@@ -1,7 +1,8 @@
 import styles from "../../styles/modules/Seller.module.css";
 import { ProductCarousel } from "../../components/products";
 import { SellerLayout } from "../../components/layouts/SellerLayout";
-import { getProductsBySeller } from "../../database";
+import { getProductsBySeller, getUserById } from "../../database";
+import { getSession } from "next-auth/react";
 
 const SellerDashboardPage = ({ products }) => {
 	return (
@@ -39,15 +40,20 @@ const SellerDashboardPage = ({ products }) => {
 	);
 };
 
-
-export const getServerSideProps = async (ctx) => {
-	const products = await getProductsBySeller(5); 
-	
-	return {
-		props: {
-			products, 
-		}
+export const getServerSideProps = async (context) => {
+	const session = await getSession(context)
+	if (!session) return {
+		redirect: { destination: "/auth/login", permanent: false}
 	}
+
+	const user = await getUserById(session.user.id);
+	if (user.role !== "vendedor") return {
+		redirect: { destination: "/", permanent: false }
+	}
+
+	const products = await getProductsBySeller(user.id);
+
+	return { props: { products } };
 }
 
 export default SellerDashboardPage;

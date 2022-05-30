@@ -2,7 +2,8 @@ import NextAuth from 'next-auth';
 import GoogleProvider from 'next-auth/providers/google';
 import Credentials from 'next-auth/providers/credentials';
 import GitHubProvider from 'next-auth/providers/github';
-// import { PrismaAdapter } from '@next-auth/prisma-adapter';
+import { PrismaAdapter } from '@next-auth/prisma-adapter';
+import {prisma} from '../../../database';
 import { checkUserEmailPassword, oAUthToDbUser } from '../../../database'
 
 export default NextAuth({
@@ -73,6 +74,6 @@ export default NextAuth({
 		},
 	},
 
-	// adapter: PrismaAdapter(prisma),
+	adapter: PrismaAdapter(prisma),
 	secret: process.env.SECRET,
 });
