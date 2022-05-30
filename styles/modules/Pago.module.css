@@ -1,0 +1,136 @@
+.container__page-pago{
+    padding: 1rem;
+    display: flex;
+    gap: 2rem;
+}
+
+.title__page{
+    margin-top: 2rem;
+    margin-left: 1.5rem;
+}
+
+.container__pago-paypal{
+    margin-top: -2rem;
+}
+
+.container__pago,
+.container__pedido {
+	width: 50%;
+	background-color: var(--bg-color-alt);
+	display: flex;
+	flex-direction: column;
+	margin: 1rem 0 3rem;
+}
+
+.pago__tarjeta {
+	padding: 3rem;
+	display: flex;
+	flex-direction: column;
+	gap: 1.5rem;
+}
+
+.select__metodo {
+	width: 20px;
+	height: 20px;
+	cursor: pointer;
+}
+
+.metodo__pago {
+	display: flex;
+	align-items: center;
+	gap: 0.5rem;
+}
+
+.container__data {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	padding: 0.5rem;
+	border: 1px solid grey;
+}
+
+.container__img-pago {
+	width: 42px;
+	height: 28px;
+	margin: 0 0.2rem;
+	border: 1px solid grey;
+	border-radius: 5px;
+}
+
+.container__form {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: 1rem;
+	border: 1px solid grey;
+	padding: 1rem;
+}
+
+.credit__inputs {
+	width: 100%;
+	height: 3rem;
+	padding: 1rem;
+	font-family: var(--body-font);
+	font-size: 0.9rem;
+	border-radius: 5px;
+}
+
+.container__private-info {
+	width: 100%;
+	display: flex;
+	justify-content: space-between;
+}
+
+.content {
+	display: flex;
+	flex-direction: column;
+	gap: 0.5rem;
+}
+
+.title__credit {
+	width: 100%;
+	color: var(--white);
+	margin-left: 5px;
+}
+
+.container__pedido-info{
+    padding: 3rem;
+}
+
+.precio, .total{
+    display: flex;
+    justify-content: space-between;
+    margin: 1rem;
+}
+
+.button__pagar{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin: 2rem 0;
+}
+
+.pagar{
+    width: 90%;
+    height: 4rem;
+    background-color: var(--main-color-400);
+    color: var(--white);
+    font-weight: 500;
+    font-size: 1.5rem;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.pagar:hover{
+    transform: scale(1.02);
+}
+
+.condiciones{
+    width: 100%;
+    font-size: var(--small-font-size);
+}
+
+.container__pedido{
+    height: 50%;
+}
