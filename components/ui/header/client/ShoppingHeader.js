@@ -18,7 +18,6 @@ export const ShoppingHeader = () => {
 
     useEffect(() => {
         if(session.status === 'authenticated') {
-            console.log(session.data.user);
             setUser(session.data.user);
         }
     }, [session]);

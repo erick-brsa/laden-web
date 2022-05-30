@@ -1,10 +1,11 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
 import { getSession } from 'next-auth/react';
 import Link from 'next/link';
 import axios from 'axios';
 import { SellerAuthLayout } from '../../components/layouts';
 import { EyeIcon, EyeOffIcon } from '@heroicons/react/solid';
+import { formatPhoneNumber } from '../../helpers';
 import styles from '../../styles/modules/seller/register.module.css';
 
 const RegisterSellerPage = ({ session }) => {
@@ -17,6 +18,13 @@ const RegisterSellerPage = ({ session }) => {
     const [passwordConfirm, setPasswordConfirm] = useState('');
     const [seePasswordConfirm, setSeePasswordConfirm] = useState(false);
 
+    // useEffect(() => {
+	// 	if (phone.length === 0) {
+	// 		setPhone('')
+	// 	}
+	// 	setPhone(formatPhoneNumber(phone));
+	// }, [phone])
+
     const fields = { name, phone, email, password, passwordConfirm }
 
     const router = useRouter();
@@ -25,7 +33,7 @@ const RegisterSellerPage = ({ session }) => {
         name: /^[a-zA-ZÀ-ÿ\s]{1,40}$/, // Letras y espacios, pueden llevar acentos.
         password: /^.{4,12}$/, // 4 a 12 digitos.
         email: /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/,
-        phone: /^[0-9]{10}$/
+        phone: /^[0-9+-]{10}$/
     }
 
 
