@@ -1,24 +1,37 @@
 /* eslint-disable @next/next/no-img-element */
+import { useState } from 'react';
+import { getSession } from 'next-auth/react';
 import { ShoppingLayout } from "../../components/layouts";
 import { ProductCarousel } from "../../components/products";
-import {
-	getProductBySlug,
-	getProductsByCategoryAndSubcategory,
-} from "../../database";
-import {
-	StarIcon as StarIconSolid,
-	HeartIcon as HeartIconSolid,
-} from "@heroicons/react/solid";
-import {
-	StarIcon as StarIconOutline,
-	HeartIcon as HeartIconOutline,
-} from "@heroicons/react/outline";
+import { useRouter } from 'next/router';
+import { getProductBySlug, getProductsByCategoryAndSubcategory, getUserById} from "../../database";
+import { StarIcon as StarIconSolid, HeartIcon as HeartIconSolid, } from "@heroicons/react/solid";
+import { StarIcon as StarIconOutline, HeartIcon as HeartIconOutline } from "@heroicons/react/outline";
 import { formatCurrency } from "../../helpers";
+import axios from 'axios';
 
 import styles from "../../styles/modules/ProductPage.module.css";
 
-const ProductPage = ({ product, moreProducts }) => {
+const ProductPage = ({ product, moreProducts, user }) => {
 	const { name, price, images, specifications, inStock, review, rating } = product;
+	const [quantity, setQuantity] = useState(1);
+
+	const router = useRouter();
+
+	const addToCart = async (e) => {
+		e.preventDefault();
+
+		if (!user) {
+			alert("Debes iniciar sesión para agregar productos a tu carrito");
+			return;
+		}
+		await axios.post("/api/cart/product", {
+			userId: user.id,
+			productId: product.id,
+			quantity: quantity,
+		})
+		router.push("/cart");
+	}
 
 	return (
 		<ShoppingLayout
@@ -69,8 +82,8 @@ const ProductPage = ({ product, moreProducts }) => {
 									{review.length == 0
 										? "Sin opiniones"
 										: review.length == 1
-										? `${review.length} opinión`
-										: `${review.length} opiniones`}
+											? `${review.length} opinión`
+											: `${review.length} opiniones`}
 								</button>
 							</div>
 
@@ -81,25 +94,26 @@ const ProductPage = ({ product, moreProducts }) => {
 
 								<p className={styles["disponible"]}>Disponibles: {inStock}</p>
 								<div className={styles["contador"]}>
-									<select className="select__cont" name="" id="">
-										{/* {
-											inStock > 0 ? Array(inStock).fill(1).map((item, index) => (
-												<option key={index} value={index + 1}>{index > 1 ? `${index + 1} unidad` : `${index + 1} unidades`}</option>
-											)) : <option value="0">No disponible</option>
-										} */}
-										<option value="1">1 unidad</option>
-										<option value="2">2 unidades</option>
-										<option value="3">3 unidades</option>
-										<option value="4">4 unidades</option>
-										<option value="5">5 unidades</option>
-										<option value="6">6 unidades</option>
-										<option value="7">7 unidades</option>
-										<option value="8">8 unidades</option>
-										<option value="9">9 unidades</option>
-										<option value="10">10 unidades</option>
+									<select
+										className={styles["item-counter-select"]} 
+										name="select"
+										value={quantity}
+										onChange={(e) => setQuantity(Number(e.target.value))}
+									>
+										{Array(product.inStock).fill(0).map((_, index) => (
+											<option
+												key={index}
+												value={index + 1}
+											>
+												{index + 1 === 1 ? `${index + 1} unidad` : `${index + 1} unidades`}
+											</option>
+										))}
 									</select>
 								</div>
-								<div className={styles["cart-btn"]}>
+								<button
+									onClick={(e) => addToCart(e)}
+									className={styles["cart-btn"]}
+								>
 									<svg
 										className={styles["main-nav__link-icon"]}
 										width="24px"
@@ -115,7 +129,7 @@ const ProductPage = ({ product, moreProducts }) => {
 										/>
 									</svg>
 									<p>Agregar al carrito</p>
-								</div>
+								</button>
 							</div>
 						</div>
 					</div>
@@ -189,29 +203,33 @@ const ProductPage = ({ product, moreProducts }) => {
 	);
 };
 
-export const getServerSideProps = async ({ query }) => {
-	const { slug } = query;
+export const getServerSideProps = async (ctx) => {
+	const { slug } = ctx.query;
 	const product = await getProductBySlug(slug);
+	const session = await getSession(ctx);
 
-	if (!product)
-		return {
-			redirect: {
-				statusCode: 301,
-				destination: "/",
-			},
-		};
+	if (!product) return {
+		redirect: {
+			statusCode: 301,
+			destination: "/",
+		},
+	};
 
 	const moreProducts = await getProductsByCategoryAndSubcategory(
 		product.category,
 		product.subcategory
 	);
 
+	const user = await getUserById(session.user.id);
+
 	return {
 		props: {
 			product,
 			moreProducts,
+			user,
 		},
 	};
-};
+}
+
 
 export default ProductPage;

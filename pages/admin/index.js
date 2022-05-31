@@ -1,5 +1,4 @@
 
-import table from "react";
 import { AdminLayout } from "../../components/layouts/AdminLayout";
 import styles from "../../styles/modules/Admin.module.css";
 
