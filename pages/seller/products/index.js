@@ -26,14 +26,16 @@ const SellerProductsPage = ({ products }) => {
 						</div>
 					</div>
 					<Link href="/seller/product/new">
-					<a className={styles["add__product"]}>
-						<PlusIcon height={24} width={24} />
-						<span className={styles["nav__name"]}>Agregar Producto</span>
-					</a>
+						<a className={styles["add__product"]}>
+							<PlusIcon height={24} width={24} />
+							<span className={styles["nav__name"]}>Agregar Producto</span>
+						</a>
 					</Link>
 				</div>
 				<section className={styles["container__section"]}>
-					<h3 className="section__title">Productos</h3>
+					<h3 className="section__title">
+						{products.length > 0 ? "Tus productos" : "No tienes productos"}
+					</h3>
 					<div className="products__container">
 						{products.map((product) => (
 							<ProductCard key={product.id} {...product} seller />
@@ -56,7 +58,7 @@ export const getServerSideProps = async (ctx) => {
 	if (user.role !== "vendedor") return {
 		redirect: { destination: "/", permanent: false }
 	}
-	
+
 	const products = await getProductsBySeller(user.id);
 
 	return {

@@ -268,7 +268,7 @@
 
 .title{
     font-weight: bolder;
-    color: var(--white);
+    color: var(--title-color);
 }
 
 .input__label{

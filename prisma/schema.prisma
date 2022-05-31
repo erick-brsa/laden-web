@@ -110,7 +110,7 @@ model Product {
     description    String      @db.Text
     inStock        Int
     slug           String      @unique
-    tags           Json
+    tags           Json?
     sold           Int?        @default(0)
     sellerId       Int         @map("seller_id")
     categoryId     Int         @map("category_id")
