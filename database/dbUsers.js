@@ -114,3 +114,53 @@ export const getUsers = async () => {
     await prisma.$disconnect();
     return users;
 }
+
+// Obtener el carrito de compras de un usuario
+export const getUserCart = async (id) => {
+    await prisma.$connect();
+    const products = await prisma.cart.findMany({
+        where: { userId: id },
+        orderBy: { createdAt: 'desc' },
+        select: { 
+            quantity: true,
+            id: true,
+            product: {
+                select: {
+                    id: true,
+                    name: true,
+                    images: true,
+                    price: true,
+                    inStock: true,
+                    slug: true,
+                    createdAt: true,
+                },
+            },
+        },
+    });
+    await prisma.$disconnect();
+    
+    return JSON.parse(JSON.stringify(products));
+}
+
+// Obtener la lista de deseos de un usuario
+export const getUserWishList = async (id) => {
+    await prisma.$connect();
+    const wishList = await prisma.wishList.findMany({
+        where: { userId: id },
+        select: {
+            product: {
+                select: {
+                    id: true,
+                    name: true,
+                    images: true,
+                    price: true,
+                    inStock: true,
+                    slug: true,
+                },
+            },
+        },
+    });
+    await prisma.$disconnect();
+    
+    return wishList;
+}

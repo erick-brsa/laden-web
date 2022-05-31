@@ -1,4 +1,5 @@
 /* eslint-disable @next/next/no-img-element */
+import { useState, useMemo } from 'react';
 import Link from "next/link";
 import { formatCurrency } from "../../helpers";
 import { StarIcon as StarIconSolid } from '@heroicons/react/solid'
@@ -6,13 +7,27 @@ import { StarIcon as StarIconOutline } from '@heroicons/react/outline'
 import styles from "/styles/modules/ProductCard.module.css";
 
 export const ProductCard = ({ name, price, slug, images, rating, review, seller }) => {
+
+    const [isHovered, setIsHovered] = useState(false);
+
+    const productImage = useMemo(() => {
+        if (images.length > 1) {
+            return isHovered ? images[1] : images[0];
+        }
+        return images[0]
+    }, [isHovered, images])
+
     return (
-        <article className={styles["product__card"]}>
+        <article 
+            className={styles["product__card"]}
+            onMouseEnter={ () => setIsHovered(true) } 
+            onMouseLeave={ () => setIsHovered(false) } 
+        >
             <Link href={seller ? `/seller/product/${slug}` : `/product/${slug}`}>
                 <a className={styles["product__link"]}>
                     <div className={styles["product__content"]}>
                         <div className={styles["product__image"]}>
-                            <img src={`${images[0]}`} alt={`Imagen de ${name}`} />
+                            <img src={productImage} alt={`Imagen de ${name}`} />
                         </div>
                         <div className={styles["product__info"]}>
                             <p className={styles["product__name"]}>

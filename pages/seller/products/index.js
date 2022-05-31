@@ -3,6 +3,9 @@ import { ProductCard } from "../../../components/products";
 import { SellerLayout } from "../../../components/layouts/SellerLayout";
 import { PlusIcon } from "@heroicons/react/solid";
 import { getProductsBySeller } from "/database";
+import { getSession } from "next-auth/react";
+import { getUserById } from "../../../database";
+import Link from "next/link";
 
 const SellerProductsPage = ({ products }) => {
 	return (
@@ -22,13 +25,17 @@ const SellerProductsPage = ({ products }) => {
 							</select>
 						</div>
 					</div>
-					<div className={styles["add__product"]}>
-						<PlusIcon height={24} width={24} />
-						<span className={styles["nav__name"]}>Agregar Producto</span>
-					</div>
+					<Link href="/seller/product/new">
+						<a className={styles["add__product"]}>
+							<PlusIcon height={24} width={24} />
+							<span className={styles["nav__name"]}>Agregar Producto</span>
+						</a>
+					</Link>
 				</div>
 				<section className={styles["container__section"]}>
-					<h3 className="section__title">Productos</h3>
+					<h3 className="section__title">
+						{products.length > 0 ? "Tus productos" : "No tienes productos"}
+					</h3>
 					<div className="products__container">
 						{products.map((product) => (
 							<ProductCard key={product.id} {...product} seller />
@@ -41,12 +48,21 @@ const SellerProductsPage = ({ products }) => {
 };
 
 export const getServerSideProps = async (ctx) => {
-	const products = await getProductsBySeller(5);
+	const session = await getSession(ctx)
+
+	if (!session) return {
+		redirect: { destination: "/auth/login", permanent: false }
+	}
+
+	const user = await getUserById(session.user.id);
+	if (user.role !== "vendedor") return {
+		redirect: { destination: "/", permanent: false }
+	}
+
+	const products = await getProductsBySeller(user.id);
 
 	return {
-		props: {
-			products,
-		},
+		props: { products },
 	};
 };
 

@@ -1,4 +1,5 @@
-.account-container {	max-width: 1000px;
+.account-container {
+	-width: 1000px;
 	position: relative;
 	margin-bottom: 50rem;
 	margin-left: auto;
@@ -10,7 +11,7 @@
 
 @media (min-width: 768px) {
 	.account-container {
-		margin-bottom: 28rem;
+		margin-bottom: 38rem;
 	}
 }
 
@@ -173,5 +174,27 @@
 	color:rgba(0, 0, 0, 1);
 	margin-bottom: -2rem;
 	margin-top: 3rem;
+}
+.formulario__error {
+	background-color: var(--red-500);
+	padding: 1rem;
+	color: var(--white);
+	font-weight: 600;
+	border-radius: 0.5rem;
+	/* color: var(--error-color); */
+	font-size: var(--bigger-font-size);
+	margin-top: -1rem;
+	margin-bottom: 2rem;
+}
+
+/* Ver contraseña */
+.formulario__icon-password {
+	position: absolute;
+	right: 15px;
+	top: 50%;
+	transform: translateY(20%);
+	cursor: pointer;
+	font-size: 20px;
+	color: var(--text-color);
 }
 /*  */

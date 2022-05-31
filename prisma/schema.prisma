@@ -110,7 +110,7 @@ model Product {
     description    String      @db.Text
     inStock        Int
     slug           String      @unique
-    tags           Json
+    tags           Json?
     sold           Int?        @default(0)
     sellerId       Int         @map("seller_id")
     categoryId     Int         @map("category_id")
@@ -170,6 +170,8 @@ model Cart {
     userId    Int     @map("user_id")
     productId Int     @map("product_id")
     quantity  Int     @default(1)
+    createdAt DateTime @default(now()) @map(name: "created_at")
+
     user      User    @relation(fields: [userId], references: [id], onDelete: Cascade)
     product   Product @relation(fields: [productId], references: [id], onDelete: Cascade)
 
@@ -180,6 +182,7 @@ model WishList {
     id        String  @id @default(cuid())
     userId    Int     @map("user_id")
     productId Int     @map("product_id")
+    createdAt DateTime @default(now()) @map(name: "created_at")
     user      User    @relation(fields: [userId], references: [id], onDelete: Cascade)
     product   Product @relation(fields: [productId], references: [id], onDelete: Cascade)
 

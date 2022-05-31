@@ -347,7 +347,7 @@ img {
 	margin-right: auto;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 1220px) {
 	.container {
 		padding-left: 20px;
 		padding-right: 20px;

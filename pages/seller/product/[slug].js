@@ -1,7 +1,7 @@
 import { getProductBySlug } from "/database";
 import { SellerLayout } from "/components/layouts/SellerLayout";
 
-const SellerEditProductPage = ({ product }) => {
+const SellerEditProductPage = ({ user, product }) => {
 	return (
 		<SellerLayout>
 			<div className="container section">
@@ -11,8 +11,18 @@ const SellerEditProductPage = ({ product }) => {
 	);
 };
 
-export const getServerSideProps = async ({ query }) => {
-	const { slug } = query;
+export const getServerSideProps = async (ctx) => {
+	const session = await getSession(ctx)
+	if (!session) return {
+		redirect: { destination: "/auth/login", permanent: false}
+	}
+
+	const user = await getUserById(session.user.id);
+	if (user.role !== "vendedor") return {
+		redirect: { destination: "/", permanent: false }
+	}
+	
+	const { slug } = ctx.query;
 	const product = await getProductBySlug(slug);
 
 	if (!product)
@@ -26,6 +36,7 @@ export const getServerSideProps = async ({ query }) => {
 	return {
 		props: {
 			product,
+			user
 		},
 	};
 };

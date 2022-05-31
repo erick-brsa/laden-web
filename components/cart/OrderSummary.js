@@ -1,21 +1,37 @@
+import { useState, useEffect } from 'react';
+import Link from 'next/link';
 import styles from '../../styles/modules/Cart.module.css';
+import { formatCurrency } from '../../helpers';
 
-export const OrderSummary = () => {
+export const OrderSummary = ({ products }) => {
+    
+    const [total, setTotal] = useState(0);
+
+    useEffect(() => {
+        const newTotal = products.reduce((acc, { product, quantity }) => {
+            return acc + (product.price * quantity);
+        }, 0);
+        setTotal(newTotal);
+    }, [products]);
+    
     return (
-        <div className={styles["order-sumary"]}>
-            <div className={styles["order-sumary__title"]}>
+        <div className={styles["order-summary"]}>
+            <div className={styles["order-summary__title"]}>
                 <h4>
                     Resumen de la compra
                 </h4>
             </div>
             <div className={styles["order-summary__total"]}>
-                $5,856.56
+                {`Total: ${formatCurrency(total)}`}
             </div>
             <div className={styles["order-summary__button"]}>
-                <a href="#" className={styles["order-sumary--button"]}>
-                    Comprar
-                </a>
+                <Link href="/cart/checkout">
+                    <a className={styles["order-sumary--button"]}>
+                        Comprar
+                    </a>
+                </Link>
             </div>
         </div>
     )
 }
+

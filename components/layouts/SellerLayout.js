@@ -19,7 +19,7 @@ export const SellerLayout = ({ children, title, description }) => {
 				<div className={styles["l-navbar"]}>
 					<nav className={styles["nav"]}>
 						<div>
-							<Link href="/seller/">
+							<Link href="/seller">
 								<a className={styles["nav__logo"]}>
 									<svg
 										className="main-nav__logo-svg"
