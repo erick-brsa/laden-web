@@ -1,19 +1,30 @@
 /* eslint-disable @next/next/no-img-element */
-import { useState } from 'react';
-import { getSession } from 'next-auth/react';
+import { useState } from "react";
+import { getSession } from "next-auth/react";
 import { ShoppingLayout } from "../../components/layouts";
 import { ProductCarousel } from "../../components/products";
-import { useRouter } from 'next/router';
-import { getProductBySlug, getProductsByCategoryAndSubcategory, getUserById} from "../../database";
-import { StarIcon as StarIconSolid, HeartIcon as HeartIconSolid, } from "@heroicons/react/solid";
-import { StarIcon as StarIconOutline, HeartIcon as HeartIconOutline } from "@heroicons/react/outline";
+import { useRouter } from "next/router";
+import {
+	getProductBySlug,
+	getProductsByCategoryAndSubcategory,
+	getUserById,
+} from "../../database";
+import {
+	StarIcon as StarIconSolid,
+	HeartIcon as HeartIconSolid,
+} from "@heroicons/react/solid";
+import {
+	StarIcon as StarIconOutline,
+	HeartIcon as HeartIconOutline,
+} from "@heroicons/react/outline";
 import { formatCurrency } from "../../helpers";
-import axios from 'axios';
+import axios from "axios";
 
 import styles from "../../styles/modules/ProductPage.module.css";
 
 const ProductPage = ({ product, moreProducts, user }) => {
-	const { name, price, images, specifications, inStock, review, rating } = product;
+	const { name, price, images, specifications, inStock, review, rating } =
+		product;
 	const [quantity, setQuantity] = useState(1);
 
 	const router = useRouter();
@@ -29,9 +40,9 @@ const ProductPage = ({ product, moreProducts, user }) => {
 			userId: user.id,
 			productId: product.id,
 			quantity: quantity,
-		})
+		});
 		router.push("/cart");
-	}
+	};
 
 	return (
 		<ShoppingLayout
@@ -82,8 +93,8 @@ const ProductPage = ({ product, moreProducts, user }) => {
 									{review.length == 0
 										? "Sin opiniones"
 										: review.length == 1
-											? `${review.length} opinión`
-											: `${review.length} opiniones`}
+										? `${review.length} opinión`
+										: `${review.length} opiniones`}
 								</button>
 							</div>
 
@@ -95,19 +106,20 @@ const ProductPage = ({ product, moreProducts, user }) => {
 								<p className={styles["disponible"]}>Disponibles: {inStock}</p>
 								<div className={styles["contador"]}>
 									<select
-										className={styles["item-counter-select"]} 
+										className={styles["item-counter-select"]}
 										name="select"
 										value={quantity}
 										onChange={(e) => setQuantity(Number(e.target.value))}
 									>
-										{Array(product.inStock).fill(0).map((_, index) => (
-											<option
-												key={index}
-												value={index + 1}
-											>
-												{index + 1 === 1 ? `${index + 1} unidad` : `${index + 1} unidades`}
-											</option>
-										))}
+										{Array(product.inStock)
+											.fill(0)
+											.map((_, index) => (
+												<option key={index} value={index + 1}>
+													{index + 1 === 1
+														? `${index + 1} unidad`
+														: `${index + 1} unidades`}
+												</option>
+											))}
 									</select>
 								</div>
 								<button
@@ -144,13 +156,15 @@ const ProductPage = ({ product, moreProducts, user }) => {
 						<div className={styles["container__specifications"]}>
 							<h4 className={styles["subtitle__text"]}>Especificaciones</h4>
 							<div className={styles["container__list"]}>
-								<ul>
-									{specifications.map((specification, index) => (
-										<li key={index} className={styles["specifications"]}>
-											{specification}
-										</li>
-									))}
-								</ul>
+								{specifications?.length > 0 && (
+									<ul>
+										{specifications?.map((specification, index) => (
+											<li key={index} className={styles["specifications"]}>
+												{specification}
+											</li>
+										))}
+									</ul>
+								)}
 							</div>
 						</div>
 					</div>
@@ -208,28 +222,36 @@ export const getServerSideProps = async (ctx) => {
 	const product = await getProductBySlug(slug);
 	const session = await getSession(ctx);
 
-	if (!product) return {
-		redirect: {
-			statusCode: 301,
-			destination: "/",
-		},
-	};
+	if (!product)
+		return {
+			redirect: {
+				statusCode: 301,
+				destination: "/",
+			},
+		};
 
 	const moreProducts = await getProductsByCategoryAndSubcategory(
 		product.category,
 		product.subcategory
 	);
 
-	const user = await getUserById(session.user.id);
-
+	if (session){
+		const user = await getUserById(session.user.id);
+		return {
+			props: {
+				product,
+				moreProducts,
+				user,
+			},
+		};
+	}
 	return {
 		props: {
 			product,
 			moreProducts,
-			user,
+			user: null,
 		},
 	};
-}
-
+};
 
 export default ProductPage;
