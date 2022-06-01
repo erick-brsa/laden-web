@@ -52,7 +52,6 @@ model User {
     product         Product[]
     cart            Cart[]
     wishList        WishList[]
-    suggestion      Suggestion[]
     review          Review[]
     comment         Comment[]
     Notification    Notification[]
@@ -166,25 +165,25 @@ model Notification {
 }
 
 model Cart {
-    id        String  @id @default(cuid())
-    userId    Int     @map("user_id")
-    productId Int     @map("product_id")
-    quantity  Int     @default(1)
+    id        String   @id @default(cuid())
+    userId    Int      @map("user_id")
+    productId Int      @map("product_id")
+    quantity  Int      @default(1)
     createdAt DateTime @default(now()) @map(name: "created_at")
 
-    user      User    @relation(fields: [userId], references: [id], onDelete: Cascade)
-    product   Product @relation(fields: [productId], references: [id], onDelete: Cascade)
+    user    User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+    product Product @relation(fields: [productId], references: [id], onDelete: Cascade)
 
     @@map(name: "cart")
 }
 
 model WishList {
-    id        String  @id @default(cuid())
-    userId    Int     @map("user_id")
-    productId Int     @map("product_id")
+    id        String   @id @default(cuid())
+    userId    Int      @map("user_id")
+    productId Int      @map("product_id")
     createdAt DateTime @default(now()) @map(name: "created_at")
-    user      User    @relation(fields: [userId], references: [id], onDelete: Cascade)
-    product   Product @relation(fields: [productId], references: [id], onDelete: Cascade)
+    user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+    product   Product  @relation(fields: [productId], references: [id], onDelete: Cascade)
 
     @@map(name: "wishlist")
 }
@@ -202,11 +201,9 @@ model ShoppingHistory {
 
 model Suggestion {
     id        String   @id @default(cuid())
-    userId    Int      @map("user_id")
     title     String
     message   String   @db.LongText
     createdAt DateTime @default(now()) @map(name: "created_at")
-    user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 
     @@map(name: "suggestions")
 }

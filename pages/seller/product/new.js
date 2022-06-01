@@ -22,6 +22,8 @@ const NewProductPage = ({ categories, subcategories, user }) => {
 	const [error, setError] = useState(false)
 	const [errorMessage, setErrorMessage] = useState("");
 
+	const router = useRouter()
+
 	const handleSubmit = async (e) => {
 		e.preventDefault();
 		if (name === "" || price === "" || inStock === "" || description === "" || category === "") {

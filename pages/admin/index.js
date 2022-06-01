@@ -38,22 +38,18 @@ const AdminHomePage = ({ users }) => {
 					<h3>Usuarios en la plataforma</h3>
 					<div className={styles["container__seller-table"]}>
 						<div className={styles["table"]}>
-							<div>
-								<DataTable
-									columns={columns}
-									data={users}
-									title="Usuarios"
-									pagination
-									fixedHeader
-								/>
-							</div>
+							<DataTable
+								columns={columns}
+								data={users}
+								fixedHeader
+							/>
 						</div>
 					</div>
 					<div className={styles["container__client-table"]}></div>
 				</div>
 			</div>
 		</AdminLayout>
-	);
+	)
 };
 
 export const getServerSideProps = async (ctx) => {
