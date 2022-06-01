@@ -1,3 +1,4 @@
+import { AdminLayout } from '../../components/layouts/AdminLayout';
 import ShoppingLayout from '../../components/layouts/ShoppingLayout';
 import { getSuggestions } from '../../database';
 
