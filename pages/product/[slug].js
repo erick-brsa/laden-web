@@ -44,6 +44,20 @@ const ProductPage = ({ product, moreProducts, user }) => {
 		router.push("/cart");
 	};
 
+	const addToWishlist = async (e) => {
+		e.preventDefault();
+
+		if (!user) {
+			alert("Debes iniciar sesión para agregar productos a tu lista de deseos");
+			return;
+		}
+		await axios.post("/api/wishlist/product", {
+			userId: user.id,
+			productId: product.id,
+		});
+		router.push("/saved");
+	}
+
 	return (
 		<ShoppingLayout
 			title={`Laden - ${name}`}
@@ -66,11 +80,16 @@ const ProductPage = ({ product, moreProducts, user }) => {
 									<h3 className={styles["title__text"]}>{product.name}</h3>
 								</div>
 								<div>
-									<HeartIconOutline
-										width={42}
-										height={42}
-										className={styles["icon__heart"]}
-									/>
+									<button
+										onClick={addToWishlist}
+										className={styles["btn-wishlist"]}
+									>
+										<HeartIconOutline
+											width={42}
+											height={42}
+											className={styles["icon__heart"]}
+										/>
+									</button>
 								</div>
 							</div>
 
@@ -93,8 +112,8 @@ const ProductPage = ({ product, moreProducts, user }) => {
 									{review.length == 0
 										? "Sin opiniones"
 										: review.length == 1
-										? `${review.length} opinión`
-										: `${review.length} opiniones`}
+											? `${review.length} opinión`
+											: `${review.length} opiniones`}
 								</button>
 							</div>
 
@@ -222,21 +241,21 @@ export const getServerSideProps = async (ctx) => {
 	const product = await getProductBySlug(slug);
 	const session = await getSession(ctx);
 
-	if (!product)
-		return {
-			redirect: {
-				statusCode: 301,
-				destination: "/",
-			},
-		};
+	if (!product) return {
+		redirect: {
+			statusCode: 301,
+			destination: "/",
+		},
+	};
 
 	const moreProducts = await getProductsByCategoryAndSubcategory(
 		product.category,
 		product.subcategory
 	);
 
-	if (session){
+	if (session) {
 		const user = await getUserById(session.user.id);
+
 		return {
 			props: {
 				product,

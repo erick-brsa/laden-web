@@ -282,3 +282,7 @@
 		height: 30px;
 	}
 }
+
+.btn-wishlist {
+	all: unset;
+}

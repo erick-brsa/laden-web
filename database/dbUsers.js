@@ -147,7 +147,9 @@ export const getUserWishList = async (id) => {
     await prisma.$connect();
     const wishList = await prisma.wishList.findMany({
         where: { userId: id },
+        orderBy: { createdAt: 'desc' },
         select: {
+            id: true,
             product: {
                 select: {
                     id: true,
@@ -156,11 +158,60 @@ export const getUserWishList = async (id) => {
                     price: true,
                     inStock: true,
                     slug: true,
+                    createdAt: true,
                 },
             },
         },
     });
     await prisma.$disconnect();
     
-    return wishList;
+    return JSON.parse(JSON.stringify(wishList));
+}
+
+export const getProductFromWishList = async (id) => {
+	await prisma.$connect();
+	const product = await prisma.wishList.findUnique({
+		where: { id },
+		select: {
+			id: true,
+			product: {
+				select: {
+					id: true,
+					name: true,
+					images: true,
+					price: true,
+					inStock: true,
+					slug: true,
+					createdAt: true,
+				},
+			},
+		},
+	});
+	await prisma.$disconnect();
+	
+	return product;
+}
+
+export const getProductInCart = async (id) => {
+	await prisma.$connect();
+	const product = await prisma.cart.findFirst({
+		where: {
+			userId: id,
+		},
+		select: {
+			id: true,
+		}
+	});
+	await prisma.$disconnect();
+	return product;
+} 
+
+export const getNotifications = async (id) => {
+	await prisma.$connect();
+	const notifications = await prisma.notification.findMany({
+		where: { userId: id },
+	});
+	await prisma.$disconnect();
+	
+	return JSON.parse(JSON.stringify(notifications));
 }

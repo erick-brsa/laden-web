@@ -1,11 +1,13 @@
+import { getSession } from "next-auth/react";
 import { getProductBySlug } from "/database";
 import { SellerLayout } from "/components/layouts/SellerLayout";
+import { getUserById } from "../../../database";
 
 const SellerEditProductPage = ({ user, product }) => {
 	return (
 		<SellerLayout>
 			<div className="container section">
-				<h1>{product.name}</h1>
+				<h1 className="text-center">{product.name}</h1>
 			</div>
 		</SellerLayout>
 	);
