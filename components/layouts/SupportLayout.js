@@ -1,19 +1,13 @@
-import {
-	BellIcon,
-	LogoutIcon,
-	ClipboardCheckIcon,
-	InboxInIcon,
-} from "@heroicons/react/outline";
+import { LogoutIcon } from "@heroicons/react/outline";
 import Head from "next/head";
 import Link from "next/link";
-import styles from "../../styles/modules/Admin.module.css";
 
-export const AdminLayout = ({ children, title, description }) => {
+export const SupportLayout = () => {
 	return (
 		<>
 			<Head>
-                <title>{title}</title>
-            </Head>
+				<title>{title}</title>
+			</Head>
 			<header className={styles["container__nav"]}>
 				<div className={styles["l-navbar"]}>
 					<nav className={styles["nav"]}>
@@ -54,23 +48,23 @@ export const AdminLayout = ({ children, title, description }) => {
 							</Link>
 
 							<div className={styles["nav__list"]}>
-								<Link href="/admin/notifications">
+								<Link href="/seller/notifications-admin">
 									<a className={styles["nav__link"]}>
-										<BellIcon height={24} width={24} />
+										{/* <BellIcon height={24} width={24} /> */}
 										<span className={styles["nav__name"]}>Notificaciones</span>
 									</a>
 								</Link>
 
 								<Link href="/admin/suggestions">
 									<a className={styles["nav__link"]}>
-										<ClipboardCheckIcon height={24} width={24} />
-										<span className={styles["nav__name"]}>Sugerencias</span>
+										{/* <ClipboardCheckIcon height={24} width={24} /> */}
+										<span className={styles["nav__name"]}>Ver pregunta</span>
 									</a>
 								</Link>
 								<Link href="/admin/devolutions">
-									<a href="" className={styles["nav__link"]}>
-										<InboxInIcon height={24} width={24} />
-										<span className={styles["nav__name"]}>Devoluciones</span>
+									<a href="#" className={styles["nav__link"]}>
+										{/* <InboxInIcon height={24} width={24} /> */}
+										<span className={styles["nav__name"]}></span>
 									</a>
 								</Link>
 							</div>

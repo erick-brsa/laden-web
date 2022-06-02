@@ -57,6 +57,7 @@ model User {
     Notification    Notification[]
     shoppingHistory ShoppingHistory[]
 
+    Report Report[]
     @@map(name: "users")
 }
 
@@ -206,4 +207,26 @@ model Suggestion {
     createdAt DateTime @default(now()) @map(name: "created_at")
 
     @@map(name: "suggestions")
+}
+
+model Report {
+    id        String   @id @default(cuid())
+    userId    Int      @map("user_id")
+    status    String   @default("Sin avance")
+    type      String
+    title     String
+    message   String   @db.LongText
+    user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+    createdAt DateTime @default(now()) @map(name: "created_at")
+
+    @@map(name: "reports")
+}
+
+model Faq {
+    id        String   @id @default(cuid())
+    question  String
+    answer    String   @db.LongText
+    createdAt DateTime @default(now()) @map(name: "created_at")
+
+    @@map(name: "faqs")
 }

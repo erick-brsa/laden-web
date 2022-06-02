@@ -236,7 +236,22 @@
     transform: scale(1.04);
 }
 
+.buttons__devolution{
+    background-color: var(--admin-color-400);
+    border: none;
+    border-radius: 5px;
+    width: 10rem;
+    height: 3rem;
+    font-size: 1rem;
+    color: var(--white);
+    cursor: pointer;
+}
 
+
+.buttons__devolution:hover{
+    transform: scale(1.04);
+
+}
 
 /*============  Estilos de nuevo producto  =============*/
 .container__form{

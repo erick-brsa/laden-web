@@ -33,21 +33,21 @@ export const users = [
 		name: "Fernanda",
 		email: "ferk@laden.com.mx",
 		image: "https://ui-avatars.com/api/?name=fernanda",
-		role: "asesor-de-mantenimiento",
+		role: "asesor-mantenimiento",
 		password: bcrypt.hashSync("ImagineDragons")
 	},
 	{
 		name: "Sofia",
 		email: "sofiak@laden.com.mx",
 		image: "https://ui-avatars.com/api/?name=sofia",
-		role: "ingeniero-de-software",
+		role: "ingeniero-soporte",
 		password: bcrypt.hashSync("ImagineDragons")
 	},
 	{
 		name: "Jesus",
 		email: "jesus@laden.com.mx",
 		image: "https://ui-avatars.com/api/?name=jesus",
-		role: "ingeniero-de-mantenimiento",
+		role: "ingeniero-mantenimiento",
 		password: bcrypt.hashSync("ImagineDragons")
 	},
 	{
