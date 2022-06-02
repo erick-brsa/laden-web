@@ -1,44 +1,28 @@
 /* eslint-disable @next/next/no-img-element */
-import { useState, useEffect } from 'react';
+// import { useState, useEffect } from 'react';
 import { forceReload, formatCurrency } from '../../helpers';
-import { useRouter } from 'next/router';
 import Link from 'next/link';
 import axios from 'axios';
+import { useRouter } from 'next/router';
 
 import styles from "../../styles/modules/Cart.module.css";
 
-export const ProductCardCart = ({ id, product, quantity, userId }) => {
+export const ProductCardWishList = ({ id, product, userId }) => {
 
-    const [productQuantity, setProductQuantity] = useState(quantity);
     const router = useRouter();
 
-    const updateQuantity = async (e) => {
-        setProductQuantity(Number(e.target.value));
-        forceReload();
-    }
-
     const deleteProduct = async (e) => {
-        await axios.delete('/api/cart/product', { data: { productId: id} });
+        await axios.delete('/api/wishlist/product', { data: { wishListId: id} });
         forceReload();
     }
 
-    const moveProductToWishList = async (e) => {
-        await axios.patch('/api/cart/product', {
-            cartId: id,
+    const addToCart = async (e) => {
+        await axios.put('/api/wishlist/product', {
+            wishListId: id,
             userId: userId,
         });
-        router.push('/saved');
+        router.push('/cart');
     }
-
-    useEffect(() => {
-        const updateProduct = async () => {
-            await axios.put('/api/cart/product', {
-                productId: id,
-                quantity: productQuantity
-            })
-        }
-        updateProduct()
-    }, [productQuantity, id]);
 
     return (
         <article
@@ -63,21 +47,7 @@ export const ProductCardCart = ({ id, product, quantity, userId }) => {
                         </div>
                         <div className={styles["item-counter"]}>
                             {product.inStock > 0 ? (
-                                <select
-                                    className={styles["item-counter-select"]}
-                                    name="item-counter-select"
-                                    onChange={(e) => updateQuantity(e)}
-                                >
-                                    {Array(product.inStock).fill(0).map((_, index) => (
-                                        <option
-                                            key={index}
-                                            value={index + 1}
-                                            {...(index + 1 === quantity ? { selected: true } : {})}
-                                        >
-                                            {index + 1 === 1 ? `${index + 1} unidad` : `${index + 1} unidades`}
-                                        </option>
-                                    ))}
-                                </select>
+                                <p>En stock: {product.inStock}</p>
                             ) : (
                                 <p>Agotado</p>
                             )}
@@ -103,9 +73,9 @@ export const ProductCardCart = ({ id, product, quantity, userId }) => {
                     <button
                         type="button"
                         className={styles["button-update"]}
-                        onClick={(e) => moveProductToWishList(e)}
+                        onClick={(e) => addToCart(e)}
                     >
-                        Mover a la lista de deseos
+                        Mover al carrito
                     </button>
                 </div>
             </footer>

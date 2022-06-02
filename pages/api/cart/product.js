@@ -6,6 +6,8 @@ export default function handler(req, res) {
             return addProductToCart(req, res);
         case 'PUT':
             return updateProductInCart(req, res);
+        case 'PATCH':
+            return moveProductToWishList(req, res);
         case 'DELETE':
             return deleteProductFromCart(req, res);
         default:
@@ -36,7 +38,7 @@ const addProductToCart = async (req, res) => {
     })
 
     const productInCart = await prisma.cart.findMany({
-        where: { product: {id: productId}, user: { id: userId } }
+        where: { product: { id: productId }, user: { id: userId } }
     });
 
     if (productInCart.length > 0) {
@@ -56,8 +58,6 @@ const addProductToCart = async (req, res) => {
             userId: userId
         }
     })
-    
-    console.log(req.body)
 
     return res.status(200).send({
         message: 'Agregado al carrito'
@@ -101,5 +101,31 @@ const deleteProductFromCart = async (req, res) => {
     await prisma.$disconnect();
     return res.status(200).send({
         message: 'Producto eliminado'
+    })
+}
+
+const moveProductToWishList = async (req, res) => {
+    const { cartId, userId } = req.body;
+    await prisma.$connect();
+
+    const product = await prisma.cart.findUnique({
+        where: { id: cartId },
+        select: { productId: true },
+    });
+
+    await prisma.cart.delete({ 
+        where: { id: cartId }, 
+    });
+
+    await prisma.wishList.create({
+        data: {
+            productId: product.productId,
+            userId: userId,
+        }
+    });
+
+    await prisma.$disconnect();
+    return res.status(200).send({
+        message: 'Producto actualizado'
     })
 }
