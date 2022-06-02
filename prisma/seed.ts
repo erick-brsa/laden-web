@@ -1,5 +1,5 @@
 import { PrismaClient } from "@prisma/client";
-import { categories, subcategories, users, products, suggestions } from "./data";
+import { categories, subcategories, users, products, suggestions, faqs } from "./data";
 
 const prisma = new PrismaClient();
 
@@ -20,6 +20,9 @@ const main = async (): Promise<void> => {
 		})
 		await prisma.suggestion.createMany({
 			data: suggestions
+		})
+		await prisma.faq.createMany({
+			data: faqs
 		})
 		await prisma.$disconnect();
 	} catch (error) {

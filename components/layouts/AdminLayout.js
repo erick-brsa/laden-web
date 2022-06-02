@@ -18,7 +18,7 @@ export const AdminLayout = ({ children, title, description }) => {
 				<div className={styles["l-navbar"]}>
 					<nav className={styles["nav"]}>
 						<div>
-							<Link href="/seller/">
+							<Link href="/admin">
 								<a className={styles["nav__logo"]}>
 									<svg
 										className="main-nav__logo-svg"
@@ -54,21 +54,21 @@ export const AdminLayout = ({ children, title, description }) => {
 							</Link>
 
 							<div className={styles["nav__list"]}>
-								<Link href="/seller/notifications-seller">
+								<Link href="/admin/notifications">
 									<a className={styles["nav__link"]}>
 										<BellIcon height={24} width={24} />
 										<span className={styles["nav__name"]}>Notificaciones</span>
 									</a>
 								</Link>
 
-								<Link href="/seller/products">
+								<Link href="/admin/suggestions">
 									<a className={styles["nav__link"]}>
 										<ClipboardCheckIcon height={24} width={24} />
 										<span className={styles["nav__name"]}>Sugerencias</span>
 									</a>
 								</Link>
-								<Link href="/seller/deliveries">
-									<a href="#" className={styles["nav__link"]}>
+								<Link href="/admin/devolutions">
+									<a href="" className={styles["nav__link"]}>
 										<InboxInIcon height={24} width={24} />
 										<span className={styles["nav__name"]}>Devoluciones</span>
 									</a>

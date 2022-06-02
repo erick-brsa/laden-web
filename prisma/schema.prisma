@@ -52,12 +52,12 @@ model User {
     product         Product[]
     cart            Cart[]
     wishList        WishList[]
-    suggestion      Suggestion[]
     review          Review[]
     comment         Comment[]
     Notification    Notification[]
     shoppingHistory ShoppingHistory[]
 
+    Report Report[]
     @@map(name: "users")
 }
 
@@ -110,7 +110,7 @@ model Product {
     description    String      @db.Text
     inStock        Int
     slug           String      @unique
-    tags           Json
+    tags           Json?
     sold           Int?        @default(0)
     sellerId       Int         @map("seller_id")
     categoryId     Int         @map("category_id")
@@ -166,22 +166,25 @@ model Notification {
 }
 
 model Cart {
-    id        String  @id @default(cuid())
-    userId    Int     @map("user_id")
-    productId Int     @map("product_id")
-    quantity  Int     @default(1)
-    user      User    @relation(fields: [userId], references: [id], onDelete: Cascade)
-    product   Product @relation(fields: [productId], references: [id], onDelete: Cascade)
+    id        String   @id @default(cuid())
+    userId    Int      @map("user_id")
+    productId Int      @map("product_id")
+    quantity  Int      @default(1)
+    createdAt DateTime @default(now()) @map(name: "created_at")
+
+    user    User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+    product Product @relation(fields: [productId], references: [id], onDelete: Cascade)
 
     @@map(name: "cart")
 }
 
 model WishList {
-    id        String  @id @default(cuid())
-    userId    Int     @map("user_id")
-    productId Int     @map("product_id")
-    user      User    @relation(fields: [userId], references: [id], onDelete: Cascade)
-    product   Product @relation(fields: [productId], references: [id], onDelete: Cascade)
+    id        String   @id @default(cuid())
+    userId    Int      @map("user_id")
+    productId Int      @map("product_id")
+    createdAt DateTime @default(now()) @map(name: "created_at")
+    user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+    product   Product  @relation(fields: [productId], references: [id], onDelete: Cascade)
 
     @@map(name: "wishlist")
 }
@@ -199,11 +202,31 @@ model ShoppingHistory {
 
 model Suggestion {
     id        String   @id @default(cuid())
-    userId    Int      @map("user_id")
     title     String
     message   String   @db.LongText
     createdAt DateTime @default(now()) @map(name: "created_at")
-    user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 
     @@map(name: "suggestions")
+}
+
+model Report {
+    id        String   @id @default(cuid())
+    userId    Int      @map("user_id")
+    status    String   @default("Sin avance")
+    type      String
+    title     String
+    message   String   @db.LongText
+    user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+    createdAt DateTime @default(now()) @map(name: "created_at")
+
+    @@map(name: "reports")
+}
+
+model Faq {
+    id        String   @id @default(cuid())
+    question  String
+    answer    String   @db.LongText
+    createdAt DateTime @default(now()) @map(name: "created_at")
+
+    @@map(name: "faqs")
 }

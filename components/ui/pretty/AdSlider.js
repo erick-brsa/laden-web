@@ -42,7 +42,7 @@ const AdSlider = ({ images }) => {
                 {images.map((image, index) => (
                     <SwiperSlide key={index}>
                         <div className={`${styles["swiper-slide"]}`}>
-                            <Image layout="fill" src={image} alt="Imagen de carousel" />
+                            <Image layout="fill" src={image} alt="Imagen de carousel" priority />
                         </div>
                     </SwiperSlide>
                 ))}

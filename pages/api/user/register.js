@@ -5,6 +5,8 @@ export default function hander(req, res) {
     switch (req.method) {
         case 'POST':
             return registerUser(req, res);
+        case 'PUT':
+            return updateUser(req, res);
         default:
             return res.status(405).json({
                 message: 'Method not allowed'
@@ -49,7 +51,7 @@ const registerUser = async (req, res) => {
             image: "https://ui-avatars.com/api/?size=500&background=414b9a&color=fff&bold=true&name=" + name.toLocaleLowerCase(),
             email: email.toLocaleLowerCase(),
             password: bcrypt.hashSync(password),
-            name,
+            name: name,
         }
     });
 
@@ -57,5 +59,24 @@ const registerUser = async (req, res) => {
 
     return res.status(201).json({
         message: 'Usuario creado con éxito',
+    });
+}
+
+const updateUser = async (req, res) => {
+    const { id = '', name = '', phone = '', password = '' } = req.body;
+
+    await prisma.$connect();
+    const updatedUser = await prisma.user.update({
+        where: { id },
+        data: {
+            name: name,
+            phoneNumber: phone,
+            password: bcrypt.hashSync(password)
+        }
+    }); 
+    await prisma.$disconnect();
+    
+    return res.status(200).json({
+        message: 'Usuario actualizado con éxito',
     });
 }

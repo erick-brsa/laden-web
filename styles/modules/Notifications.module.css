@@ -57,7 +57,7 @@
     position: absolute;
     width: 83%;
     left: calc(70px + 156px);
-    top: 10;
+    top: 0;
     padding: 2rem 3rem;
     display: flex;
     flex-direction: column;

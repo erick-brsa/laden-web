@@ -6,6 +6,10 @@
     margin-bottom: 1rem;
     /* height: 100vh; */
   }
+
+  .title__faqs{
+    margin: 0 auto;
+  }
   
   .accordion__container {
     display: grid;
@@ -19,7 +23,7 @@
   
   .accordion__title {
     font-size: var(--small-font-size);
-    color: var(--title-color);
+    color: #26313a;
     font-weight: 400;
     margin-top: .15rem;
     transition: .2s;
@@ -35,6 +39,7 @@
   .accordion__description {
     padding: 0 1.25rem 1.25rem 3rem;
     font-size: var(--smaller-font-size);
+    color: grey;
   }
   
   .accordion__icon {
@@ -63,35 +68,35 @@
     border-radius: .25rem 0 0 .25rem;
   }
   
-  .accordion__item:nth-child(1) {
+  .accordion__item:nth-child(n) {
     background-color: #fff7f0;
   }
   
-  .accordion__item:nth-child(1)::after {
+  .accordion__item:nth-child(n)::after {
     background-color: #ffc08a;
   }
   
-  .accordion__item:nth-child(2) {
+  .accordion__item:nth-child(2n) {
     background-color: #f0f0ff;
   }
   
-  .accordion__item:nth-child(2)::after {
+  .accordion__item:nth-child(2n)::after {
     background-color: #8a8aff;
   }
   
-  .accordion__item:nth-child(3) {
+  .accordion__item:nth-child(3n) {
     background-color: #fff0f3;
   }
   
-  .accordion__item:nth-child(3)::after {
+  .accordion__item:nth-child(3n)::after {
     background-color: #ff8aa1;
   }
   
-  .accordion__item:nth-child(4) {
+  .accordion__item:nth-child(4n) {
     background-color: #f0faff;
   }
   
-  .accordion__item:nth-child(4)::after {
+  .accordion__item:nth-child(4n)::after {
     background-color: #8ad8ff;
   }
   

@@ -1,10 +1,11 @@
-import { CartList, OrderSummary } from '../../components/cart';
+import { getSession } from 'next-auth/react'
+import { OrderSummary, ProductCardCart } from '../../components/cart';
 import { ShoppingLayout } from '../../components/layouts';
-import { getSomeProducts } from '../../database';
+import { getUserById, getUserCart } from '../../database';
 
 import styles from '../../styles/modules/Cart.module.css';
 
-const CartPage = ({ products }) => {
+const CartPage = ({ products, user }) => {
     return (
         <ShoppingLayout
             title="Laden - Carrito de compras"
@@ -12,10 +13,31 @@ const CartPage = ({ products }) => {
         >
             <main>
                 <section className="container section">
-                    <div className={styles["cart-container"]}>
-                        <CartList products={products} />
-                        <OrderSummary />
-                    </div>
+                    {
+                        products.length > 0 ? (
+                            <div className={styles["cart-container"]}>
+                                <div className={styles["cart-list"]}>
+                                    {products.map(({ id, product, quantity }) => (
+                                        <ProductCardCart
+                                            key={id}
+                                            id={id}
+                                            product={product}
+                                            quantity={quantity}
+                                        />
+                                    ))}
+                                </div>
+                                <OrderSummary
+                                    products={products}
+                                />
+                            </div>
+                        ) : (
+                            <div className={styles["cart-empty"]}>
+                                <h2>
+                                    Tu carrito está vacío
+                                </h2>
+                            </div>
+                        )
+                    }
                 </section>
             </main>
         </ShoppingLayout>
@@ -23,10 +45,22 @@ const CartPage = ({ products }) => {
 }
 
 export const getServerSideProps = async (ctx) => {
-    const products = await getSomeProducts(10);
+    const session = await getSession(ctx);
+    if (!session) return {
+        redirect: {
+            destination: '/auth/login',
+            permanent: false
+        }
+    }
+
+    const user = await getUserById(session.user.id);
+
+    const products = await getUserCart(user.id);
+
     return {
         props: {
-            products
+            products,
+            user
         }
     }
 }

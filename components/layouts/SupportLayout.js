@@ -1,15 +1,8 @@
-import { signOut } from "next-auth/react"
-import styles from "../../styles/modules/Seller.module.css";
-import Link from "next/link";
-import {
-	BellIcon,
-	LogoutIcon,
-	ShoppingBagIcon,
-	TruckIcon,
-} from "@heroicons/react/outline";
+import { LogoutIcon } from "@heroicons/react/outline";
 import Head from "next/head";
+import Link from "next/link";
 
-export const SellerLayout = ({ children, title, description }) => {
+export const SupportLayout = () => {
 	return (
 		<>
 			<Head>
@@ -19,7 +12,7 @@ export const SellerLayout = ({ children, title, description }) => {
 				<div className={styles["l-navbar"]}>
 					<nav className={styles["nav"]}>
 						<div>
-							<Link href="/seller">
+							<Link href="/admin">
 								<a className={styles["nav__logo"]}>
 									<svg
 										className="main-nav__logo-svg"
@@ -55,23 +48,23 @@ export const SellerLayout = ({ children, title, description }) => {
 							</Link>
 
 							<div className={styles["nav__list"]}>
-								<Link href="/seller/notifications-seller">
+								<Link href="/seller/notifications-admin">
 									<a className={styles["nav__link"]}>
-										<BellIcon height={24} width={24} />
+										{/* <BellIcon height={24} width={24} /> */}
 										<span className={styles["nav__name"]}>Notificaciones</span>
 									</a>
 								</Link>
 
-								<Link href="/seller/products">
+								<Link href="/admin/suggestions">
 									<a className={styles["nav__link"]}>
-										<ShoppingBagIcon height={24} width={24} />
-										<span className={styles["nav__name"]}>Productos</span>
+										{/* <ClipboardCheckIcon height={24} width={24} /> */}
+										<span className={styles["nav__name"]}>Ver pregunta</span>
 									</a>
 								</Link>
-								<Link href="/seller/deliveries">
+								<Link href="/admin/devolutions">
 									<a href="#" className={styles["nav__link"]}>
-										<TruckIcon height={24} width={24} />
-										<span className={styles["nav__name"]}>Entregas</span>
+										{/* <InboxInIcon height={24} width={24} /> */}
+										<span className={styles["nav__name"]}></span>
 									</a>
 								</Link>
 							</div>
@@ -80,7 +73,7 @@ export const SellerLayout = ({ children, title, description }) => {
 						<div className={styles["container__logout"]}>
 							<a href="#" className={styles["nav__link"]}>
 								<LogoutIcon height={24} width={24} />
-								<button 
+								<button
 									className={styles["logout-btn"]}
 									onClick={() => signOut()}
 								>

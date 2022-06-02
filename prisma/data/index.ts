@@ -3,3 +3,4 @@ export * from './subcategories';
 export * from './users';
 export * from './products';
 export * from './suggestions';
+export * from './faqs'

@@ -101,6 +101,7 @@
 }
 
 .add__product{
+    all: unset;
     display: flex;
     color: var(--white);
     width: 12rem;
@@ -235,7 +236,22 @@
     transform: scale(1.04);
 }
 
+.buttons__devolution{
+    background-color: var(--admin-color-400);
+    border: none;
+    border-radius: 5px;
+    width: 10rem;
+    height: 3rem;
+    font-size: 1rem;
+    color: var(--white);
+    cursor: pointer;
+}
 
+
+.buttons__devolution:hover{
+    transform: scale(1.04);
+
+}
 
 /*============  Estilos de nuevo producto  =============*/
 .container__form{
@@ -267,7 +283,7 @@
 
 .title{
     font-weight: bolder;
-    color: var(--white);
+    color: var(--title-color);
 }
 
 .input__label{
@@ -358,7 +374,7 @@
     margin-bottom: 1rem;
 }
 
-#default-btn{
+.default-btn{
     visibility: hidden;
 }
 
@@ -367,7 +383,7 @@
     font-weight: 500;   
 }
 
-.wrapper #cancel-btn{
+.wrapper .cancel-btn{
     position: absolute;
     right: 15px;
     top: 15px;
@@ -382,7 +398,7 @@
     margin-bottom: 1rem;
 }
 
-.container__imgs #custom-btn{
+.container__imgs .custom-btn{
     width: 100%;
     height: 50px;
     display: block;
