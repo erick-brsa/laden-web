@@ -210,6 +210,9 @@ export const getNotifications = async (id) => {
 	await prisma.$connect();
 	const notifications = await prisma.notification.findMany({
 		where: { userId: id },
+		select: {
+			id: true
+		}
 	});
 	await prisma.$disconnect();
 	

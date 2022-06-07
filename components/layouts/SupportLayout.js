@@ -1,8 +1,9 @@
 import { LogoutIcon } from "@heroicons/react/outline";
 import Head from "next/head";
 import Link from "next/link";
+import styles from "../../styles/modules/Admin.module.css";
 
-export const SupportLayout = () => {
+export const SupportLayout = ({children, title}) => {
 	return (
 		<>
 			<Head>
@@ -48,23 +49,29 @@ export const SupportLayout = () => {
 							</Link>
 
 							<div className={styles["nav__list"]}>
-								<Link href="/seller/notifications-admin">
+								<Link href="/support/reports/new">
 									<a className={styles["nav__link"]}>
 										{/* <BellIcon height={24} width={24} /> */}
-										<span className={styles["nav__name"]}>Notificaciones</span>
+										<span className={styles["nav__name"]}>Crear Reporte</span>
 									</a>
 								</Link>
 
-								<Link href="/admin/suggestions">
+								<Link href="/support/reports">
 									<a className={styles["nav__link"]}>
 										{/* <ClipboardCheckIcon height={24} width={24} /> */}
-										<span className={styles["nav__name"]}>Ver pregunta</span>
+										<span className={styles["nav__name"]}>Ver Reportes</span>
 									</a>
 								</Link>
-								<Link href="/admin/devolutions">
+								<Link href="/support/faqs/new">
 									<a href="#" className={styles["nav__link"]}>
 										{/* <InboxInIcon height={24} width={24} /> */}
-										<span className={styles["nav__name"]}></span>
+										<span className={styles["nav__name"]}>Crear FAQs</span>
+									</a>
+								</Link>
+								<Link href="/support/faqs">
+									<a href="#" className={styles["nav__link"]}>
+										{/* <InboxInIcon height={24} width={24} /> */}
+										<span className={styles["nav__name"]}>Ver FAQs</span>
 									</a>
 								</Link>
 							</div>

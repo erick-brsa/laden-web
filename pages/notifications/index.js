@@ -2,7 +2,7 @@ import { useState } from "react";
 import { getSession } from "next-auth/react";
 import { Notification } from "../../components/ui";
 import { ShoppingLayout } from "../../components/layouts";
-import { getNotifications, getUserById } from "../../database";
+import { getUserById } from "../../database";
 
 import styles from "../../styles/modules/Notifications.module.css";
 
@@ -34,7 +34,7 @@ const NotificationsPage = ({notifications}) => {
 }
 
 export const getServerSideProps = async (ctx) => {
-    const session = getSession(ctx);
+    const session = await getSession(ctx);
     if (!session) return {
         redirect: {
             destination: "/auth/login",
@@ -43,11 +43,12 @@ export const getServerSideProps = async (ctx) => {
     }
 
     const user = await getUserById(session.user.id);
-    const notifications = getNotifications(user.id);
+    // const notifications = await getNotifications(user.id);
 
     return {
         props: {
-            user, notifications
+            user, 
+            // notifications
         }
     }
 }
