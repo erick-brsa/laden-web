@@ -8,3 +8,14 @@ export const getFaqs = async () => {
 
     return JSON.parse(JSON.stringify(faqs));
 }
+
+export const getFaqById = async (id) => {
+    await prisma.$connect();
+    const faq = await prisma.faq.findUnique({
+        where: {
+            id: id
+        }
+    });
+    await prisma.$disconnect();
+    return JSON.parse(JSON.stringify(faq));
+} 

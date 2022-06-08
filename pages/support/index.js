@@ -6,7 +6,6 @@ import { getFaqs } from "../../database/dbFaqs";
 import styles from "./Faqs.module.css";
 
 const SupportPage = ({faqs}) => {
-	console.log(faqs);
 	return (
 		<ShoppingLayout>
 			<section className={`${styles["accordion"]} container`}>
