@@ -1,40 +1,44 @@
 import styles from "../../../pages/support/Support.module.css";
 import { useRouter } from "next/router";
+import axios from "axios";
 
-export const Report = ({id, title, description, status, role}) => {
+export const Faq = ({ faq }) => {
+
 	const router = useRouter();
+
+	const handleDelete = async () => {
+		await axios.delete('/api/support/faq', {
+			data: { id: faq.id }
+		})
+		router.reload()
+	}
+
 	return (
 		<div className={styles["container__main"]}>
 			<div className={styles["container__second"]}>
 				<div className={styles["container__camp"]}>
-					<p className={styles["title__camp"]}>Titulo del reporte:</p>
-					<p>{title}</p>
-				</div>
-				<div className={styles["container__camp"]}>
-					<p className={styles["title__camp"]}>Estatus:</p>
-					<p>{status}</p>
-				</div>
-				<div className={styles["container__camp"]}>
-					<p className={styles["title__camp"]}>Tipo de usuario:</p>
-					<p>{role}</p>
+					<p className={styles["title__camp"]}>Pregunta:</p>
+					<p>{faq.question}</p>
 				</div>
 				<div className={styles["description__container"]}>
-					<p className={styles["title__camp"]}>Descripción</p>
+					<p className={styles["title__camp"]}>Respuesta:</p>
 					<p className={styles["description"]}>
-						{description}
+						{faq.answer}
 					</p>
 				</div>
 				<div className={styles["container__buttons"]}>
 					<button
 						className={styles["buttons"]}
-					>
-						Eliminar
-					</button>
-					<button
-						className={styles["buttons"]}
-						onClick={() => router.push(`/support/reports/${id}`)}
+						onClick={() => router.push(`/support/faqs/${faq.id}`)}
 					>
 						Modificar
+					</button>
+					<button
+						type="button"
+						className={styles["buttons"]}
+						onClick={handleDelete}
+					>
+						Eliminar
 					</button>
 				</div>
 			</div>

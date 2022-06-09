@@ -1,10 +1,10 @@
 import { getSession } from "next-auth/react";
-import { SupportLayout } from "../../../components/layouts/SupportLayout";
-import { Report } from "../../../components/ui/reports/index";
-import { getReports, getUserById } from "../../../database";
+import { SupportLayout } from "../../../components/layouts";
+import { Report } from "../../../components/ui/";
+import { getAllReports, getUserById } from "../../../database";
 import styles from "../Support.module.css";
 
-const ReportsPage = ({ reports, user }) => {
+const ReportsPage = ({ reports }) => {
 	return (
 		<SupportLayout title="Laden - Reportes" description="Reportes">
 			<div className={styles["container__page"]}>
@@ -13,11 +13,7 @@ const ReportsPage = ({ reports, user }) => {
 					{reports.map((report) => (
 						<Report
 							key={report.id} 
-							id={report.id} 
-							title={report.title}
-							description={report.message}
-							role={user.role}
-							status={report.status}
+							report={report}
 							/>
 					))}
 				</div>
@@ -37,7 +33,7 @@ export const getServerSideProps = async (context) => {
 		};
 
 	const user = await getUserById(session.user.id);
-	const reports = await getReports(user.role);
+	const reports = await getAllReports();
 	return {
 		props: {
 			user,

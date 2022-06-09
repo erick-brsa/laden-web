@@ -6,9 +6,11 @@ import { getReport, getUserById } from "../../../database";
 import axios from "axios";
 import { SupportLayout } from "../../../components/layouts/SupportLayout";
 
-const ModifyReport = ({ report }) => {
+const ModifyReport = ({ report, user }) => {
 	const [title, setTitle] = useState(report.title);
-	const [message, setMessage] = useState(report.message);
+	const [description, setDescription] = useState(report.description);
+	const [solution, setSolution] = useState(report.solution);
+	const [status, setStatus] = useState(report.status);
 
 	const [error, setError] = useState(false);
 	const [errorMessage, setErrorMessage] = useState("");
@@ -25,28 +27,19 @@ const ModifyReport = ({ report }) => {
 			return;
 		}
 
-		if (message.length < 20) {
-			setError(true);
-			setErrorMessage(
-				"La descripción debe contener por lo menos 20 caracteres"
-			);
-			return;
-		}
-
 		setError(false);
 		setErrorMessage("");
 
-		await axios.put("/api/support/reports", {
+		await axios.put("/api/support/report", {
 			id: report.id,
-			title: title,
-			message: message,
-			status: "en proceso",
+			title,
+			description,
+			solution,
+			status,
 		});
 
 		setSuccess(true);
-		setTimeout(() => {
-			location.reload();
-		}, 5000);
+		router.push('/support/reports')
 	};
 
 	return (
@@ -77,7 +70,12 @@ const ModifyReport = ({ report }) => {
 									<label htmlFor="exampleFormControlInput1">
 										<h4> Estatus </h4>
 									</label>
-									<select className={styles["form-control"]}>
+									<select 
+										disabled={user.role !== "ingeniero-mantenimiento"}
+										className={styles["form-control"]}
+										value={status}
+										onChange={(e) => setStatus(e.target.value)}
+									>
 										<option value="Sin avance" className={styles["options"]}>
 											Sin avance
 										</option>
@@ -95,11 +93,22 @@ const ModifyReport = ({ report }) => {
 										<h4> Descripción </h4>
 									</label>
 									<textarea
-										rows="5"
 										placeholder="Escribe tu la descripción aquí"
 										className={styles["form-control"]}
-										value={message}
-										onChange={(e) => setMessage(e.target.value)}
+										value={description}
+										onChange={(e) => setDescription(e.target.value)}
+									></textarea>
+								</div>
+
+								<div className={styles["container__message"]}>
+									<label htmlFor="">
+										<h4> Solución </h4>
+									</label>
+									<textarea
+										placeholder="Escribe tu la descripción aquí"
+										className={styles["form-control"]}
+										value={solution}
+										onChange={(e) => setSolution(e.target.value)}
 									></textarea>
 								</div>
 								<div className={styles["container__buttons"]}>
@@ -138,6 +147,7 @@ export const getServerSideProps = async (context) => {
 		};
 
 	const user = await getUserById(session.user.id);
+	console.log(user.role)
 	const report = await getReport(context.query.id);
 	return {
 		props: {

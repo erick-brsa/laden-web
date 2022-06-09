@@ -36,160 +36,85 @@ const NewFaqPage = ({ user }) => {
 		setError(false);
 		setErrorMessage("");
 
-		await axios.post("/api/support/faqs", {
+		await axios.post("/api/support/faq", {
 			question: question,
 			answer: answer,
 		});
 
 		setSuccess(true);
-		setTimeout(() => {
-			location.reload();
-		}, 5000);
+		router.push('/support/faqs')
 	};
 
-	if (user.role === "ingeniero-soporte") {
-		return (
-			<SupportLayout
-				title="Laden - Panel de soporte"
-				description="Panel de soporte"
-			>
-				<div className={styles["container__page"]}>
-					<div className={styles["container__ingsupport-page"]}>
-						<div className="container section">
-							<div className={styles["container"]}>
-								{error && <div>{errorMessage}</div>}
-								{success && <div>Faq guardada</div>}
-								<form method="POST" className={styles["container__form"]}>
-									<h1 className="text-center">Crear FAQ</h1>
-									<div className={styles["container__title"]}>
-										<label htmlFor="exampleFormControlInput1">
-											<h4> Título </h4>
-										</label>
-										<input
-											type="text"
-											id="exampleFormControlInput1"
-											className={styles["form-control"]}
-											placeholder="Título de la FAQ"
-											value={question}
-											onChange={(e) => setQuestion(e.target.value)}
-										/>
-									</div>
+	return (
+		<SupportLayout
+			title="Laden - Panel de soporte"
+			description="Panel de soporte"
+		>
+			<div className={styles["container__page"]}>
+				<div className={styles["container__ingsupport-page"]}>
+					<div className="container section">
+						<div className={styles["container"]}>
+							{error && <div>{errorMessage}</div>}
+							{success && <div>Faq guardada</div>}
+							<form method="POST" className={styles["container__form"]}>
+								<h1 className="text-center">Crear FAQ</h1>
+								<div className={styles["container__title"]}>
+									<label htmlFor="exampleFormControlInput1">
+										<h4> Pregunta </h4>
+									</label>
+									<input
+										type="text"
+										id="exampleFormControlInput1"
+										className={styles["form-control"]}
+										placeholder="Plantea una pregunta"
+										value={question}
+										onChange={(e) => setQuestion(e.target.value)}
+									/>
+								</div>
 
-									<div className={styles["container__message"]}>
-										<label htmlFor="">
-											<h4> Descripción </h4>
-										</label>
-										<textarea
-											rows="5"
-											placeholder="Escribe tu FAQ aquí"
-											className={styles["form-control"]}
-											value={answer}
-											onChange={(e) => setAnswer(e.target.value)}
-										></textarea>
-									</div>
-									<div className={styles["container__buttons"]}>
-										<button
-											type="submit"
-											className={styles["buttons"]}
-											onClick={(e) => handleSubmitFaq("ing. soporte", e)}
-										>
-											Guardar
-										</button>
-										<button
-											type="button"
-											className={styles["buttons"]}
-											onClick={() => router.push("/support")}
-										>
-											Cancelar
-										</button>
-										<button
-											type="button"
-											className={styles["buttons"]}
-											onClick={() => router.push("/support/faqs")}
-										>
-											Ver FAQs
-										</button>
-									</div>
-								</form>
-							</div>
+								<div className={styles["container__message"]}>
+									<label htmlFor="">
+										<h4> Respuesta </h4>
+									</label>
+									<textarea
+										rows="5"
+										placeholder="Responde la FAQ"
+										className={styles["form-control"]}
+										value={answer}
+										onChange={(e) => setAnswer(e.target.value)}
+									></textarea>
+								</div>
+								<div className={styles["container__buttons"]}>
+									<button
+										type="submit"
+										className={styles["buttons"]}
+										onClick={(e) => handleSubmitFaq(e)}
+									>
+										Guardar
+									</button>
+									<button
+										type="button"
+										className={styles["buttons"]}
+										onClick={() => router.push("/support")}
+									>
+										Cancelar
+									</button>
+									<button
+										type="button"
+										className={styles["buttons"]}
+										onClick={() => router.push("/support/faqs")}
+									>
+										Ver FAQs
+									</button>
+								</div>
+							</form>
 						</div>
 					</div>
 				</div>
-			</SupportLayout>
-		);
-	}
+			</div>
+		</SupportLayout>
+	);
 
-    if (user.role === "asesor-mantenimiento") {
-		return (
-			<SupportLayout
-				title="Laden - Panel de soporte"
-				description="Panel de soporte"
-			>
-				<div className={styles["container__page"]}>
-					<div className={styles["container__ingsupport-page"]}>
-						<div className="container section">
-							<div className={styles["container"]}>
-								{error && <div>{errorMessage}</div>}
-								{success && <div>Faq guardada</div>}
-								<form method="POST" className={styles["container__form"]}>
-									<h1 className="text-center">Crear FAQ</h1>
-									<div className={styles["container__title"]}>
-										<label htmlFor="exampleFormControlInput1">
-											<h4> Título </h4>
-										</label>
-										<input
-											type="text"
-											id="exampleFormControlInput1"
-											className={styles["form-control"]}
-											placeholder="Título de la FAQ"
-											value={question}
-											onChange={(e) => setQuestion(e.target.value)}
-										/>
-									</div>
-
-									<div className={styles["container__message"]}>
-										<label htmlFor="">
-											<h4> Descripción </h4>
-										</label>
-										<textarea
-											rows="5"
-											placeholder="Escribe tu FAQ aquí"
-											className={styles["form-control"]}
-											value={answer}
-											onChange={(e) => setAnswer(e.target.value)}
-										></textarea>
-									</div>
-									<div className={styles["container__buttons"]}>
-										<button
-											type="submit"
-											className={styles["buttons"]}
-											onClick={(e) => handleSubmitFaq("ing. soporte", e)}
-										>
-											Guardar
-										</button>
-										<button
-											type="button"
-											className={styles["buttons"]}
-											onClick={() => router.push("/support")}
-										>
-											Cancelar
-										</button>
-										<button
-											type="button"
-											className={styles["buttons"]}
-											onClick={() => router.push("/support/faqs")}
-										>
-											Ver FAQs
-										</button>
-									</div>
-								</form>
-							</div>
-						</div>
-					</div>
-				</div>
-			</SupportLayout>
-		);
-	}
 
 	return (
 		<SupportLayout

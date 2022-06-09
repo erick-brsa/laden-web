@@ -1,4 +1,5 @@
 import { LogoutIcon } from "@heroicons/react/outline";
+import { BellIcon, ClipboardCheckIcon, InboxInIcon } from "@heroicons/react/solid";
 import Head from "next/head";
 import Link from "next/link";
 import styles from "../../styles/modules/Admin.module.css";
@@ -13,7 +14,7 @@ export const SupportLayout = ({children, title}) => {
 				<div className={styles["l-navbar"]}>
 					<nav className={styles["nav"]}>
 						<div>
-							<Link href="/admin">
+							<Link href="/support">
 								<a className={styles["nav__logo"]}>
 									<svg
 										className="main-nav__logo-svg"
@@ -51,26 +52,26 @@ export const SupportLayout = ({children, title}) => {
 							<div className={styles["nav__list"]}>
 								<Link href="/support/reports/new">
 									<a className={styles["nav__link"]}>
-										{/* <BellIcon height={24} width={24} /> */}
+										<BellIcon height={24} width={24} />
 										<span className={styles["nav__name"]}>Crear Reporte</span>
 									</a>
 								</Link>
 
 								<Link href="/support/reports">
 									<a className={styles["nav__link"]}>
-										{/* <ClipboardCheckIcon height={24} width={24} /> */}
+										<ClipboardCheckIcon height={24} width={24} />
 										<span className={styles["nav__name"]}>Ver Reportes</span>
 									</a>
 								</Link>
 								<Link href="/support/faqs/new">
 									<a href="#" className={styles["nav__link"]}>
-										{/* <InboxInIcon height={24} width={24} /> */}
+										<InboxInIcon height={24} width={24} />
 										<span className={styles["nav__name"]}>Crear FAQs</span>
 									</a>
 								</Link>
 								<Link href="/support/faqs">
 									<a href="#" className={styles["nav__link"]}>
-										{/* <InboxInIcon height={24} width={24} /> */}
+										<InboxInIcon height={24} width={24} />
 										<span className={styles["nav__name"]}>Ver FAQs</span>
 									</a>
 								</Link>

@@ -1,13 +1,15 @@
-import styles from "../Support.module.css";
+import { SupportLayout } from "../../../components/layouts/SupportLayout";
+import { getFaqById } from "../../../database";
+import { getSession } from "next-auth/react";
 import { useRouter } from "next/router";
 import { useState } from "react";
-import { getSession } from "next-auth/react";
-import { getFaqById } from "../../../database/dbFaqs";
-import { SupportLayout } from "../../../components/layouts/SupportLayout";
+import axios from "axios";
+
+import styles from "../Support.module.css";
 
 const ModifyFaq = ({ faq }) => {
 	const [question, setQuestion] = useState(faq.question);
-	const [answer, setAnswer] = useState("");
+	const [answer, setAnswer] = useState(faq.answer);
 
 	const [error, setError] = useState(false);
 	const [errorMessage, setErrorMessage] = useState("");
@@ -35,15 +37,12 @@ const ModifyFaq = ({ faq }) => {
 		setError(false);
 		setErrorMessage("");
 
-		await axios.post("/api/support/faqs", {
-			question: question,
-			answer: answer,
+		await axios.put("/api/support/faq", {
+			id: faq.id, question, answer,
 		});
 
 		setSuccess(true);
-		setTimeout(() => {
-			location.reload();
-		}, 5000);
+		router.push('/support/faqs')
 	};
 
 	return (
@@ -58,7 +57,7 @@ const ModifyFaq = ({ faq }) => {
 								<h1 className="text-center">Modificar FAQ</h1>
 								<div className={styles["container__title"]}>
 									<label htmlFor="exampleFormControlInput1">
-										<h4> Título </h4>
+										<h4>Pregunta</h4>
 									</label>
 									<input
 										type="text"
@@ -72,7 +71,7 @@ const ModifyFaq = ({ faq }) => {
 
 								<div className={styles["container__message"]}>
 									<label htmlFor="">
-										<h4> Descripción </h4>
+										<h4>Respuesta</h4>
 									</label>
 									<textarea
 										rows="5"
@@ -88,12 +87,12 @@ const ModifyFaq = ({ faq }) => {
 										className={styles["buttons"]}
 										onClick={(e) => handleSubmitFaq(e)}
 									>
-										Guardar
+										Guardar cambios
 									</button>
 									<button
 										type="button"
 										className={styles["buttons"]}
-										onClick={() => router.push("/support/faqs")}
+										onClick={() => router.push('/support/faqs')}
 									>
 										Cancelar
 									</button>
@@ -108,6 +107,7 @@ const ModifyFaq = ({ faq }) => {
 };
 
 export const getServerSideProps = async (context) => {
+	const { id } = context.query
 	const session = await getSession(context);
 	if (!session)
 		return {
@@ -118,6 +118,7 @@ export const getServerSideProps = async (context) => {
 		};
 
 	const faq = await getFaqById(context.query.id);
+
 	return {
 		props: {
 			faq,

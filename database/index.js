@@ -1,7 +1,7 @@
 export * from "./prisma";
-export * from "./dbSuggestions";
+export * from "./dbFaqs";
+export * from "./dbUsers";
+export * from "./dbReports";
 export * from "./dbProducts";
 export * from "./dbCategories";
-export * from "./dbUsers";
-export * from './dbReports';
-
+export * from "./dbSuggestions";

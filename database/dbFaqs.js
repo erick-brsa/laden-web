@@ -1,11 +1,11 @@
 import { prisma } from "./prisma";
+
 export const getFaqs = async () => {
     await prisma.$connect();
-
-    const faqs = await prisma.faq.findMany();
-
+    const faqs = await prisma.faq.findMany({
+        orderBy: { createdAt: "desc" },
+    });
     await prisma.$disconnect();
-
     return JSON.parse(JSON.stringify(faqs));
 }
 

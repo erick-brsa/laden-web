@@ -210,17 +210,18 @@ model Suggestion {
 }
 
 model Report {
-    id         String   @id @default(cuid())
-    userId     Int      @map("user_id")
-    status     String   @default("Sin avance")
-    type       String
-    title      String
-    message    String   @db.LongText
-    user       User     @relation(fields: [userId], references: [id], onDelete: Cascade)
-    createdAt  DateTime @default(now()) @map(name: "created_at")
+    id          String   @id @default(cuid())
+    userId      Int?     @map("user_id")
+    status      String   @default("Sin avance")
+    type        String
+    title       String
+    description String   @db.LongText
+    solution    String   @db.LongText
+    author      User?    @relation(fields: [userId], references: [id], onDelete: Cascade)
+    createdAt   DateTime @default(now()) @map(name: "created_at")
 
     @@map(name: "reports")
-} 
+}
 
 model Faq {
     id        String   @id @default(cuid())

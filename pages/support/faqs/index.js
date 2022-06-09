@@ -1,8 +1,7 @@
 import styles from "../Support.module.css";
-import { ShoppingLayout } from "../../../components/layouts";
+import { SupportLayout } from "../../../components/layouts";
 import { Faq } from "../../../components/ui";
 import { getFaqs } from "../../../database/dbFaqs";
-import { SupportLayout } from "../../../components/layouts/SupportLayout";
 
 const FaqsPage = ({ faqs }) => {
 	return (
@@ -13,9 +12,7 @@ const FaqsPage = ({ faqs }) => {
 					{faqs.map((faq) => (
 						<Faq
 							key={faq.id}
-							id={faq.id}
-							question={faq.question}
-							answer={faq.answer}
+							faq={faq}
 						/>
 					))}
 				</div>
